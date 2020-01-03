@@ -60,18 +60,18 @@ function sendServer() {
 
 function sendSMS() {
     var sid = document.getElementById("Sid").value;
-    $.post("http://10.0.0.246:4500/FindParentSendNotification", {
+    $.post("/FindParentSendNotification", {
         RegNo: sid
     }, function(data) {
         console.log(data);
     });
 }
 
-var socket = io('http://localhost:3600');
-socket.emit('new-user', bid);
+
 
 function start() {
-
+  var socket = io('http://localhost:3600');
+  socket.emit('new-user', bid);
     document.getElementById("journey").innerHTML = "Journey Started";
 
 
@@ -97,7 +97,7 @@ function start() {
 
         console.log(curLat, curLang);
 
-        if (Math.abs(curLat - lat) > 0.001 || Math.abs(curLang - lang) > 0.001) {
+        //if (Math.abs(curLat - lat) > 0.001 || Math.abs(curLang - lang) > 0.001) {
             room = bid;
 
             var position = {
@@ -108,7 +108,7 @@ function start() {
             socket.emit('getloc', position);
 
             $("#Presentloc").html(`${curLat} , ${curLang} , ${room}`);
-        }
+        //}
 
     }, 1000);
 

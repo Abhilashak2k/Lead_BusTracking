@@ -25,8 +25,12 @@
        <div class="form-style-6">
        <h1 class="display-4">Receiving Location at parent</h1>
      <br>
-       <input type="text" placeholder="Enter Mobile Number" id="PhNo">
+       <input type="text" placeholder="Enter Mobile Number" id="PhNo" >
+       <br>
+       <input type="text" placeholder="Enter Child's Roll Number" id="RoNo">
+       <br>
        <button  onclick="getRouteId()">What is my Route ID</button>
+       <br><br>
        <input type="text" id="bid" name="" placeholder="Enter Route ID if you know it">
       <br><br>
        <button id="sendloc"  onclick="start()">Start receiving location</button>
@@ -46,20 +50,20 @@ function start() {
 }
 
 function addMessages(message) {
-    console.log("message " + message);
+    console.log("message ", message.lat, message.lang);
     $("#Presentloc").html('')
-    $("#Presentloc").append(`
-      <p> ${message.lat} , ${message.lang} </p>`)
+    $("#Presentloc").append(`<p> ${message.lat} , ${message.lang} </p>`);
 }
 
 function getRouteId() {
     let phNo = document.getElementById("PhNo").value;
+    let roNo = document.getElementById("RoNo").value;
     console.log(phNo);
     $.post("/UpdateParentRouteInfo", {
         PhNo: phNo
     }, (data) => {
         console.log(data);
-        document.getElementById("bid").value = "Your Route ID is " + data;
+        document.getElementById("bid").value = "Your Route ID is " + data[0].route_id;
         bid = data;
     })
 }

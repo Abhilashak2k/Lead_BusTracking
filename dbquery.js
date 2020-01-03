@@ -34,22 +34,21 @@ exports.UpdateConductorRouteInfo = (req, res) => {
 exports.UpdateParentRouteInfo = (req, res) => {
 
     var parent_no = req.body.PhNo;
-    console.log("IN UpdateParentRouteInfo");
 
     poolDB.getConnection((err, conn) => {
 
         conn.query(`SELECT route_id
-                  FROM   student
-                  WHERE  _id = (SELECT child_id
-                                FROM   parent_child
-                                WHERE  parent_id = (SELECT _id
-                                                    FROM   parent
-                                                    WHERE  phone = "${parent_no}")) `, (err, data) => {
+                    FROM   student
+                    WHERE  _id = (SELECT child_id
+                                  FROM   parent_child
+                                  WHERE  parent_id = (SELECT _id
+                                                      FROM   parent
+                                                      WHERE  phone = "${parent_no}")) `, (err, data) => {
             if (err)
                 console.log(err);
             else {
                 console.log(data);
-                res.status(200).send((data[0].route_id).toString());
+                res.send(data);
             }
         })
 
