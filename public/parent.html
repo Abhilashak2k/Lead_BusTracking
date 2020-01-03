@@ -37,32 +37,32 @@
       </div>
   </div>
 <script>
-var bid="bus";
+var bid = "bus";
 var socket = io('http://localhost:3600');
 
-
-function start(){
-  socket.emit('new-user',bid);
+function start() {
+    socket.emit('new-user', bid);
     socket.on('loc', addMessages);
 }
-function addMessages(message){
-//console.log(' i am here ');
-    console.log("message " +  message);
+
+function addMessages(message) {
+    console.log("message " + message);
     $("#Presentloc").html('')
-   $("#Presentloc").append(`
+    $("#Presentloc").append(`
       <p> ${message.lat} , ${message.lang} </p>`)
-   }
+}
 
-   function getRouteId() {
-       let phNo = document.getElementById("PhNo").value;
-       console.log(phNo);
-       $.post("/UpdateParentRouteInfo", {PhNo : phNo}, (data)=>{
-         console.log(data);
-         document.getElementById("bid").value = "Your Route ID is " + data;
-         bid=data;
-       })
-   }
-
+function getRouteId() {
+    let phNo = document.getElementById("PhNo").value;
+    console.log(phNo);
+    $.post("/UpdateParentRouteInfo", {
+        PhNo: phNo
+    }, (data) => {
+        console.log(data);
+        document.getElementById("bid").value = "Your Route ID is " + data;
+        bid = data;
+    })
+}
 </script>
 </body>
 </html>

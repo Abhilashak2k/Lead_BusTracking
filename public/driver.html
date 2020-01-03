@@ -25,10 +25,10 @@
 <div class="form-style-6">
 <h1>Welcome to Conductor App</h1>
 <div class = "form-style-6">
-<input type="text" placeholder="Your Bus Id" id="BusNo" />
-<input type="text" placeholder="Your Shift" id="ShiftNo" />
-<button onclick="sendServer()">Submit</button>
-<br><br>
+  <input type="text" placeholder="Your Bus Id" id="BusNo" />
+  <input type="text" placeholder="Your Shift" id="ShiftNo" />
+  <button onclick="sendServer()">Submit</button>
+  <br><br>
 </div>
 
 <h1 id ="RouteId" >Your Route Id Here </h1>
@@ -44,68 +44,73 @@
 let bid = "bus";
 //Sending to sendServer
 
-  function sendServer(){
+function sendServer() {
     console.log("");
     var b_id = document.getElementById("BusNo").value;
     var sid = document.getElementById("ShiftNo").value;
-    $.post("/UpdateConductorRouteInfo",{BusNo : b_id, Shift : sid}, function(data){
+    $.post("/UpdateConductorRouteInfo", {
+        BusNo: b_id,
+        Shift: sid
+    }, function(data) {
         console.log(data);
         document.getElementById("RouteId").innerHTML = "Your Route ID is " + data;
-        bid=data;
+        bid = data;
     });
-  }
-  function sendSMS() {
+}
+
+function sendSMS() {
     var sid = document.getElementById("Sid").value;
-    $.post("http://10.0.0.246:4500/FindParentSendNotification",{RegNo : sid}, function(data){
+    $.post("http://10.0.0.246:4500/FindParentSendNotification", {
+        RegNo: sid
+    }, function(data) {
         console.log(data);
     });
-  }
-  var socket = io('http://localhost:3600');
-   socket.emit('new-user',bid);
-  //socket.on('message2', addMessages);
+}
 
+var socket = io('http://localhost:3600');
+socket.emit('new-user', bid);
 
-  function start(){
+function start() {
 
     document.getElementById("journey").innerHTML = "Journey Started";
 
 
-  var lat, curLat;
-  var lang, curLang;
-  var dif=1;
+    var lat, curLat;
+    var lang, curLang;
+    var dif = 1;
 
-  navigator.geolocation.getCurrentPosition((pos)=>{
+    navigator.geolocation.getCurrentPosition((pos) => {
         lat = curLat = pos.coords.latitude;
         lang = curLang = pos.coords.longitude;
 
-  });
-
-
-  setInterval(function(){
-
-    navigator.geolocation.getCurrentPosition((pos)=>{
-          // curLat = pos.coords.latitude+dif++;
-          // curLang = pos.coords.longitude+dif++;
-          curLat++;
-          curLang++;
     });
 
-    console.log(curLat, curLang);
 
-    if(Math.abs(curLat-lat)>0.001 || Math.abs(curLang-lang)>0.001){
-      room = bid;
+    setInterval(function() {
 
-      var position = {
-          lat : curLat,
-          lang : curLang,
-          room : bid
-      }
-      socket.emit('getloc',position);
+        navigator.geolocation.getCurrentPosition((pos) => {
+            // curLat = pos.coords.latitude+dif++;
+            // curLang = pos.coords.longitude+dif++;
+            curLat++;
+            curLang++;
+        });
 
-      $("#Presentloc").html(`${curLat} , ${curLang} , ${room}`);
-    }
+        console.log(curLat, curLang);
 
-  },1000);
+        if (Math.abs(curLat - lat) > 0.001 || Math.abs(curLang - lang) > 0.001) {
+            room = bid;
+
+            var position = {
+                lat: curLat,
+                lang: curLang,
+                room: bid
+            }
+            socket.emit('getloc', position);
+
+            $("#Presentloc").html(`${curLat} , ${curLang} , ${room}`);
+        }
+
+    }, 1000);
 
 
 }
