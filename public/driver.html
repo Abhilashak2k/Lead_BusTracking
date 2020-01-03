@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type = "text/css" href="style.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<script src="http://localhost:3600/socket.io/socket.io.js"></script>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<body>
+<div class = "row">
+  <div class="col-sm-12">
+ <br>
+<div class="form-style-6">
+<h1>Welcome to Conductor App</h1>
+<div class = "form-style-6">
+<input type="text" placeholder="Your Bus Id" id="BusNo" />
+<input type="text" placeholder="Your Shift" id="ShiftNo" />
+<button onclick="sendServer()">Submit</button>
+<br><br>
+</div>
+
+<h1 id ="RouteId" >Your Route Id Here </h1>
+
+<br>
+<button id="journey" onclick="start()">Start Journey</button>
+<br><br><br>
+<input type="text" placeholder="Student roll number Here" id="Sid" onclick="sendSMS()">
+</div>
+</div>
+</div>
+<script>
+let bid = "bus";
+//Sending to sendServer
+
+  function sendServer(){
+    console.log("");
+    var b_id = document.getElementById("BusNo").value;
+    var sid = document.getElementById("ShiftNo").value;
+    $.post("/UpdateConductorRouteInfo",{BusNo : b_id, Shift : sid}, function(data){
+        console.log(data);
+        document.getElementById("RouteId").innerHTML = "Your Route ID is " + data;
+        bid=data;
+    });
+  }
+  function sendSMS() {
+    var sid = document.getElementById("Sid").value;
+    $.post("http://10.0.0.246:4500/FindParentSendNotification",{RegNo : sid}, function(data){
+        console.log(data);
+    });
+  }
+  var socket = io('http://localhost:3600');
+   socket.emit('new-user',bid);
+  //socket.on('message2', addMessages);
+
+
+  function start(){
+
+    document.getElementById("journey").innerHTML = "Journey Started";
+
+
+  var lat, curLat;
+  var lang, curLang;
+  var dif=1;
+
+  navigator.geolocation.getCurrentPosition((pos)=>{
+        lat = curLat = pos.coords.latitude;
+        lang = curLang = pos.coords.longitude;
+
+  });
+
+
+  setInterval(function(){
+
+    navigator.geolocation.getCurrentPosition((pos)=>{
+          // curLat = pos.coords.latitude+dif++;
+          // curLang = pos.coords.longitude+dif++;
+          curLat++;
+          curLang++;
+    });
+
+    console.log(curLat, curLang);
+
+    if(Math.abs(curLat-lat)>0.001 || Math.abs(curLang-lang)>0.001){
+      room = bid;
+
+      var position = {
+          lat : curLat,
+          lang : curLang,
+          room : bid
+      }
+      socket.emit('getloc',position);
+
+      $("#Presentloc").html(`${curLat} , ${curLang} , ${room}`);
+    }
+
+  },1000);
+
+
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type = "text/css" href="style.css">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<script src="http://localhost:3600/socket.io/socket.io.js"></script>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<body>
+  <div class="container">
+       <br>
+       <div class="form-style-6">
+       <h1 class="display-4">Receiving Location at parent</h1>
+     <br>
+       <input type="text" placeholder="Enter Mobile Number" id="PhNo">
+       <button  onclick="getRouteId()">What is my Route ID</button>
+       <input type="text" id="bid" name="" placeholder="Enter Route ID if you know it">
+      <br><br>
+       <button id="sendloc"  onclick="start()">Start receiving location</button>
+
+       </div>
+       <div id="Presentloc">
+
+      </div>
+  </div>
+<script>
+var bid="bus";
+var socket = io('http://localhost:3600');
+
+
+function start(){
+  socket.emit('new-user',bid);
+    socket.on('loc', addMessages);
+}
+function addMessages(message){
+//console.log(' i am here ');
+    console.log("message " +  message);
+    $("#Presentloc").html('')
+   $("#Presentloc").append(`
+      <p> ${message.lat} , ${message.lang} </p>`)
+   }
+
+   function getRouteId() {
+       let phNo = document.getElementById("PhNo").value;
+       console.log(phNo);
+       $.post("/UpdateParentRouteInfo", {PhNo : phNo}, (data)=>{
+         console.log(data);
+         document.getElementById("bid").value = "Your Route ID is " + data;
+         bid=data;
+       })
+   }
+
+</script>
+</body>
+</html>
