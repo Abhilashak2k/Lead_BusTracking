@@ -63,7 +63,7 @@ function sendServer() {
 function sendSMS() {
     var sid = document.getElementById("Sid").value;
     $.post("/FindParentSendNotification", {
-        RegNo : sid
+        RegNo: sid
     }, function(data) {
         console.log("Parent to be sent success SMS " + data);
         $("#butsid").append(`<br><p>${data}</p>`)
@@ -71,8 +71,8 @@ function sendSMS() {
 }
 
 function start() {
-  var socket = io('http://localhost:3600');
-  socket.emit('new-user', bid);
+    var socket = io('http://localhost:3600');
+    socket.emit('new-user', bid);
     document.getElementById("journey").innerHTML = "Journey Started";
 
 
@@ -98,21 +98,19 @@ function start() {
         console.log(curLat, curLang);
 
         //if (Math.abs(curLat - lat) > 0.001 || Math.abs(curLang - lang) > 0.001) {
-            room = bid;
+        room = bid;
 
-            var position = {
-                lat: curLat,
-                lang: curLang,
-                room: bid
-            }
-            socket.emit('getloc', position);
+        var position = {
+            lat: curLat,
+            lang: curLang,
+            room: bid
+        }
+        socket.emit('getloc', position);
 
-            $("#Presentloc").html(`${curLat} , ${curLang} , ${room}`);
+        $("#Presentloc").html(`${curLat} , ${curLang} , ${room}`);
         //}
 
     }, 1000);
-
-
 }
 </script>
 </body>

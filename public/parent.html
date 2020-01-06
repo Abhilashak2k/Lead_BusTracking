@@ -58,40 +58,38 @@ function getRouteId() {
     $.post("/UpdateParentRouteInfo", {
         PhNo: phNo
     }, (data) => {
-        if(data.length==1){
-          document.getElementById("bid").value = "Your Route ID is " + data[0].route_id;
-          bid = data[0].route_id;
-        }
-        else if(data.length>1){
+        if (data.length == 1) {
+            document.getElementById("bid").value = "Your Route ID is " + data[0].route_id;
+            bid = data[0].route_id;
+        } else if (data.length > 1) {
 
             var RouteButton = document.getElementById("RouteButton");
             RouteButton.parentNode.removeChild(RouteButton);
 
             var html = `<select  id = "DropDown">` +
-            `<option selected hidden style='display:none'>Select Childname</option>`;
+                `<option selected hidden style='display:none'>Select Childname</option>`;
 
             data.forEach(element => {
-                html +=  `<option>${element.name}</option>`;
+                html += `<option>${element.name}</option>`;
             });
 
-            html  = html + `</select><button id="Childname">Submit</button>`;
+            html = html + `</select><button id="Childname">Submit</button>`;
             console.log(html);
             $("#DropBox").append(html);
 
-            $("#Childname").click(function () {
-              let Childname = document.getElementById("DropDown").value;
-              console.log("User has Selected the childname " + Childname);
-              data.forEach(element => {
-                if(element.name==Childname){
-                document.getElementById("bid").value = "Your Route ID is " + element.route_id;
-                bid = element.route_id;
-                }
-              });
-             });
-        }
-        else{
-          alert("Enter a registered Phone Number");
-          document.getElementById("PhNo").value = "";
+            $("#Childname").click(function() {
+                let Childname = document.getElementById("DropDown").value;
+                console.log("User has Selected the childname " + Childname);
+                data.forEach(element => {
+                    if (element.name == Childname) {
+                        document.getElementById("bid").value = "Your Route ID is " + element.route_id;
+                        bid = element.route_id;
+                    }
+                });
+            });
+        } else {
+            alert("Enter a registered Phone Number");
+            document.getElementById("PhNo").value = "";
         }
     })
 }
