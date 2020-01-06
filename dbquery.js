@@ -48,7 +48,7 @@ exports.UpdateParentRouteInfo = (req, res) => {
                 console.log(err);
             else {
                 console.log(data);
-                res.send(data);
+                res.status(200).send((data[0].route_id).toString());
             }
         })
 
