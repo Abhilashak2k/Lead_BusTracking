@@ -1,47 +1,48 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<link rel="stylesheet" type = "text/css" href="style.css">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-<script src="http://localhost:3600/socket.io/socket.io.js"></script>
+    <script src="http://localhost:3600/socket.io/socket.io.js"></script>
 </head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <body>
-<div class = "row">
-  <div class="col-sm-12">
- <br>
-<div class="form-style-6">
-<h1>Welcome to Conductor App</h1>
-<div class = "form-style-6">
-  <input type="text" placeholder="Your Bus Id" id="BusNo" />
-  <input type="text" placeholder="Your Shift" id="ShiftNo" />
-  <button onclick="sendServer()">Submit</button>
-  <br><br>
-</div>
+    <div class="row">
+        <div class="col-sm-12">
+            <br>
+            <div class="form-style-6">
+                <h1>Welcome to Conductor App</h1>
+                <div class="form-style-6">
+                    <input type="text" placeholder="Your Bus Id" id="BusNo" />
+                    <input type="text" placeholder="Your Shift" id="ShiftNo" />
+                    <button onclick="sendServer()">Submit</button>
+                    <br><br>
+                </div>
 
-<h1 id ="RouteId" >Your Route Id Here </h1>
+                <h1 id="RouteId">Your Route Id Here </h1>
 
-<br>
-<button id="journey" onclick="start()">Start Journey</button>
-<br><br><br>
-<input type="text" placeholder="Student roll number Here" id="Sid">
-<button onclick="sendSMS()">Submit</button>
-<p id = "butsid"></p>
-</div>
-</div>
-</div>
+                <br>
+                <button id="journey" onclick="start()">Start Journey</button>
+                <br><br><br>
+                <input type="text" placeholder="Student roll number Here" id="Sid">
+                <button onclick="sendSMS()">Submit</button>
+                <p id="butsid"></p>
+            </div>
+        </div>
+    </div>
 <script>
 let bid = "bus";
 //Sending to sendServer
