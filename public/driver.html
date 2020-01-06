@@ -36,7 +36,9 @@
 <br>
 <button id="journey" onclick="start()">Start Journey</button>
 <br><br><br>
-<input type="text" placeholder="Student roll number Here" id="Sid" onclick="sendSMS()">
+<input type="text" placeholder="Student roll number Here" id="Sid">
+<button onclick="sendSMS()">Submit</button>
+<p id = "butsid"></p>
 </div>
 </div>
 </div>
@@ -61,9 +63,10 @@ function sendServer() {
 function sendSMS() {
     var sid = document.getElementById("Sid").value;
     $.post("/FindParentSendNotification", {
-        RegNo: sid
+        RegNo : sid
     }, function(data) {
-        console.log(data);
+        console.log("Parent to be sent success SMS " + data);
+        $("#butsid").append(`<br><p>${data}</p>`)
     });
 }
 
@@ -80,7 +83,6 @@ function start() {
     navigator.geolocation.getCurrentPosition((pos) => {
         lat = curLat = pos.coords.latitude;
         lang = curLang = pos.coords.longitude;
-
     });
 
 

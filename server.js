@@ -23,9 +23,6 @@ io.on('connection', (socket) => {
     console.log('a user is connected ')
 });
 
-io.on('disconnection', (socket) => {
-    console.log("user disconnected " + socket);
-})
 
 var bodyParser = require('body-parser')
 app.use(bodyParser.json());
@@ -33,7 +30,7 @@ app.use(bodyParser.urlencoded({
     extended: false
 }))
 
-
+app.post('/FindParentSendNotification', dbquery.FindParentSendNotification);
 app.post('/UpdateConductorRouteInfo', dbquery.UpdateConductorRouteInfo);
 app.post('/UpdateParentRouteInfo', dbquery.UpdateParentRouteInfo);
 

@@ -43,14 +43,36 @@ exports.UpdateParentRouteInfo = (req, res) => {
                                   FROM   parent_child
                                   WHERE  parent_id = (SELECT _id
                                                       FROM   parent
-                                                      WHERE  phone = "${parent_no}")) `, (err, data) => {
-            if (err)
-                console.log("There is an error " + err);
-            else {
-                console.log(data);
-                res.send(data);
-            }
-        })
+                                                      WHERE  phone = "${parent_no}")) `,
+                    (err, data) => {
+                        if (err)
+                            console.log("There is an error " + err);
+                        else {
+                            console.log(data);
+                            res.send(data);
+                        }
+                    })
 
     });
+}
+
+
+exports.FindParentSendNotification = (req, res) =>{
+  var regNo = req.body.RegNo;
+  console.log("Entered roll no is " + regNo);
+  poolDB.getConnection((err, conn)=>{
+    conn.query(`SELECT phone
+                FROM parent
+                WHERE _id = (SELECT parent_id
+                          	 FROM parent_child
+                      			 WHERE child_id = ${regNo} )`,
+                (err, data)=>{
+                  if (err)
+                      console.log("There is an error " + err);
+                  else {
+                      console.log("\nQuery result of FindParentSendNotification " + data[0].phone);
+                      res.send(data[0].phone);
+                  }
+                });
+  });
 }
