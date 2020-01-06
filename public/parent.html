@@ -47,6 +47,7 @@ var socket = io('http://localhost:3600');
 function start() {
     socket.emit('new-user', bid);
     socket.on('loc', addMessages);
+    console.log("here");
 }
 
 function addMessages(message) {
