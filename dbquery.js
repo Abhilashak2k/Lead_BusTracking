@@ -37,18 +37,18 @@ exports.UpdateParentRouteInfo = (req, res) => {
 
     poolDB.getConnection((err, conn) => {
 
-        conn.query(`SELECT route_id
+        conn.query(`SELECT *
                     FROM   student
-                    WHERE  _id = (SELECT child_id
+                    WHERE  _id IN (SELECT child_id
                                   FROM   parent_child
                                   WHERE  parent_id = (SELECT _id
                                                       FROM   parent
                                                       WHERE  phone = "${parent_no}")) `, (err, data) => {
             if (err)
-                console.log(err);
+                console.log("There is an error " + err);
             else {
                 console.log(data);
-                res.status(200).send((data[0].route_id).toString());
+                res.send(data);
             }
         })
 

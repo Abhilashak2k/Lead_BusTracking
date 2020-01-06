@@ -25,11 +25,9 @@
        <div class="form-style-6">
        <h1 class="display-4">Receiving Location at parent</h1>
      <br>
-       <input type="text" placeholder="Enter Mobile Number" id="PhNo" >
-       <br>
-       <input type="text" placeholder="Enter Child's Roll Number" id="RoNo">
-       <br>
-       <button  onclick="getRouteId()">What is my Route ID</button>
+       <input type="text" placeholder="Enter Mobile Number" id="PhNo">
+       <p id = "DropBox"></p>
+       <button  onclick="getRouteId()" id="RouteButton">What is my Route ID</button>
        <br><br>
        <input type="text" id="bid" name="" placeholder="Enter Route ID if you know it">
       <br><br>
@@ -40,6 +38,7 @@
 
       </div>
   </div>
+
 <script>
 var bid = "bus";
 var socket = io('http://localhost:3600');
@@ -47,25 +46,53 @@ var socket = io('http://localhost:3600');
 function start() {
     socket.emit('new-user', bid);
     socket.on('loc', addMessages);
-    console.log("here");
 }
 
 function addMessages(message) {
-    console.log("message ", message.lat, message.lang);
     $("#Presentloc").html('')
     $("#Presentloc").append(`<p> ${message.lat} , ${message.lang} </p>`);
 }
 
 function getRouteId() {
     let phNo = document.getElementById("PhNo").value;
-    let roNo = document.getElementById("RoNo").value;
-    console.log(phNo);
     $.post("/UpdateParentRouteInfo", {
         PhNo: phNo
     }, (data) => {
-        console.log(data);
-        document.getElementById("bid").value = "Your Route ID is " + data[0].route_id;
-        bid = data;
+        if(data.length==1){
+          document.getElementById("bid").value = "Your Route ID is " + data[0].route_id;
+          bid = data[0].route_id;
+        }
+        else if(data.length>1){
+
+            var RouteButton = document.getElementById("RouteButton");
+            RouteButton.parentNode.removeChild(RouteButton);
+
+            var html = `<select  id = "DropDown">` +
+            `<option selected hidden style='display:none'>Select Childname</option>`;
+
+            data.forEach(element => {
+                html +=  `<option>${element.name}</option>`;
+            });
+
+            html  = html + `</select><button id="Childname">Submit</button>`;
+            console.log(html);
+            $("#DropBox").append(html);
+
+            $("#Childname").click(function () {
+              let Childname = document.getElementById("DropDown").value;
+              console.log("User has Selected the childname " + Childname);
+              data.forEach(element => {
+                if(element.name==Childname){
+                document.getElementById("bid").value = "Your Route ID is " + element.route_id;
+                bid = element.route_id;
+                }
+              });
+             });
+        }
+        else{
+          alert("Enter a registered Phone Number");
+          document.getElementById("PhNo").value = "";
+        }
     })
 }
 </script>

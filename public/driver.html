@@ -67,8 +67,6 @@ function sendSMS() {
     });
 }
 
-
-
 function start() {
   var socket = io('http://localhost:3600');
   socket.emit('new-user', bid);
