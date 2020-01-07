@@ -56,47 +56,11 @@ function getRouteId() {
     })
 }
 
-function findLoc() {
-  console.log("Inside callback function post api call");
-  var lati, longi;
-  if( navigator.geolocation ){
-    navigator.geolocation.getCurrentPosition( success );
-  }
-
-  function success(position)
-  {
-    longi = g_lang;
-    lati = g_lati;
-    console.log("Coordinates recieved by map are " + lati + longi);
-    initMap(lati, longi);
-  }
-}
-
-function initMap(lati, longi) {
-
-  console.log("In initmap function " + lati + longi);
-
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: lati, lng:  longi},
-    zoom: 18
-  });
-
-  var marker = new google.maps.Marker({
-    map:map,
-    position:{lat:lati, lng: longi},
-    icon:'https://img.icons8.com/color/15/000000/filled-circle.png'
-  });
-
-  marker.setMap(map);
-
-//update coords
-
-marker = new google.maps.Marker({
-    map:map,
-    position:{lat:lati, lng: longi},
-    icon:'https://img.icons8.com/color/15/000000/filled-circle.png'
-  });
-
-  marker.setMap(map);
+function getMap() {
+  $.get("/getMapAPI", (data)=>{
+    console.log("************************************");
+    console.log(data);
+    $("#Presentloc").append(`<img>${data}</img>`);
+  })
 
 }

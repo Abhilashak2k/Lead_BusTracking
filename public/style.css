@@ -22,14 +22,7 @@ html, body {
 	color: #fff;
 	margin: -16px -16px 16px -16px;
 }
-.form-style-6 input[type="text"],
-.form-style-6 input[type="date"],
-.form-style-6 input[type="datetime"],
-.form-style-6 input[type="email"],
-.form-style-6 input[type="number"],
-.form-style-6 input[type="search"],
-.form-style-6 input[type="time"],
-.form-style-6 input[type="url"],
+.form-style-6 input,
 .form-style-6 textarea,
 .form-style-6 select
 {
@@ -49,14 +42,7 @@ html, body {
 	color: #555;
 	font: 95% Arial, Helvetica, sans-serif;
 }
-.form-style-6 input[type="text"]:focus,
-.form-style-6 input[type="date"]:focus,
-.form-style-6 input[type="datetime"]:focus,
-.form-style-6 input[type="email"]:focus,
-.form-style-6 input[type="number"]:focus,
-.form-style-6 input[type="search"]:focus,
-.form-style-6 input[type="time"]:focus,
-.form-style-6 input[type="url"]:focus,
+.form-style-6 input:focus,
 .form-style-6 textarea:focus,
 .form-style-6 select:focus
 {

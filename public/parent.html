@@ -49,10 +49,12 @@
 <script src="parentLogic.js">
 </script>
 <script>
+
   $("#sendloc").click(function(){
     console.log("in click trigger");
-    $.get("https://maps.googleapis.com/maps/api/js?key=AIzaSyCCisTmeb2rhu32O7n2M6RF1iS6xWFbEH4", findLoc);
-  });
+    getMap();
+    })
+
 </script>
 
 </html>

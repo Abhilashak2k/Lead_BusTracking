@@ -2,6 +2,7 @@ let bid = "bus";
 //Sending to sendServer
 
 function sendServer() {
+    console.log("");
     const b_id = document.getElementById("BusNo").value;
     const sid = document.getElementById("ShiftNo").value;
     $.post("/UpdateConductorRouteInfo", {
@@ -21,7 +22,10 @@ function sendSMS() {
     }, function(data) {
         document.getElementById("Sid").value="";
         console.log("Parent to be sent success SMS " + data);
-        $("#butsid").append(`<br><p>${data}</p>`)
+        $.post("/sendsms", {message : "Your child has boarded", tosend:  data}, (successMsg)=>{
+          console.log(successMsg + "Message sent!");
+
+        } )
     });
 }
 
@@ -43,12 +47,8 @@ function start() {
 
     setInterval(function() {
 
-        navigator.geolocation.getCurrentPosition((pos) => {
-            // curLat = pos.coords.latitude+dif++;
-            // curLang = pos.coords.longitude+dif++;
             curLat++;
             curLang++;
-        });
 
         console.log(curLat, curLang);
 
