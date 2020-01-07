@@ -11,8 +11,8 @@ const poolDB = mysql.createPool({
 
 exports.UpdateConductorRouteInfo = (req, res) => {
 
-    var busno = req.body.BusNo;
-    var shift = req.body.Shift;
+    let busno = req.body.BusNo;
+    let shift = req.body.Shift;
 
     poolDB.getConnection(function(err, conn) {
 
@@ -24,7 +24,7 @@ exports.UpdateConductorRouteInfo = (req, res) => {
                 console.log(err);
             else {
                 console.log("SQL query result is " + data[0].route_id);
-                res.status(200).send((data[0].route_id).toString());
+                res.send((data[0].route_id).toString());
             }
         })
     });
@@ -33,7 +33,7 @@ exports.UpdateConductorRouteInfo = (req, res) => {
 
 exports.UpdateParentRouteInfo = (req, res) => {
 
-    var parent_no = req.body.PhNo;
+    let parent_no = req.body.PhNo;
 
     poolDB.getConnection((err, conn) => {
 
@@ -57,7 +57,7 @@ exports.UpdateParentRouteInfo = (req, res) => {
 }
 
 exports.FindParentSendNotification = (req, res) => {
-    var regNo = req.body.RegNo;
+    let regNo = req.body.RegNo;
     console.log("Entered roll no is " + regNo);
     poolDB.getConnection((err, conn) => {
         conn.query(`SELECT phone

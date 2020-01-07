@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
-
+<style>
+  #map {
+    height: 100%;
+  }
+</style>
 <head>
     <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -32,68 +36,23 @@
             <br><br>
             <input type="text" id="bid" name="" placeholder="Enter Route ID if you know it">
             <br><br>
-            <button id="sendloc" onclick="start()">Start receiving location</button>
+            <button id="sendloc" onclick="start()" >Start receiving location</button>
 
         </div>
         <div id="Presentloc">
 
         </div>
     </div>
-
-<script>
-var bid = "bus";
-var socket = io('http://localhost:3600');
-
-function start() {
-    socket.emit('new-user', bid);
-    socket.on('loc', addMessages);
-}
-
-function addMessages(message) {
-    $("#Presentloc").html('')
-    $("#Presentloc").append(`<p> ${message.lat} , ${message.lang} </p>`);
-}
-
-function getRouteId() {
-    let phNo = document.getElementById("PhNo").value;
-    $.post("/UpdateParentRouteInfo", {
-        PhNo: phNo
-    }, (data) => {
-        if (data.length == 1) {
-            document.getElementById("bid").value = "Your Route ID is " + data[0].route_id;
-            bid = data[0].route_id;
-        } else if (data.length > 1) {
-
-            var RouteButton = document.getElementById("RouteButton");
-            RouteButton.parentNode.removeChild(RouteButton);
-
-            var html = `<select  id = "DropDown">` +
-                `<option selected hidden style='display:none'>Select Childname</option>`;
-
-            data.forEach(element => {
-                html += `<option>${element.name}</option>`;
-            });
-
-            html = html + `</select><button id="Childname">Submit</button>`;
-            console.log(html);
-            $("#DropBox").append(html);
-
-            $("#Childname").click(function() {
-                let Childname = document.getElementById("DropDown").value;
-                console.log("User has Selected the childname " + Childname);
-                data.forEach(element => {
-                    if (element.name == Childname) {
-                        document.getElementById("bid").value = "Your Route ID is " + element.route_id;
-                        bid = element.route_id;
-                    }
-                });
-            });
-        } else {
-            alert("Enter a registered Phone Number");
-            document.getElementById("PhNo").value = "";
-        }
-    })
-}
-</script>
+    <div id = 'map'></div>
 </body>
+
+<script src="parentLogic.js">
+</script>
+<script>
+  $("#sendloc").click(function(){
+    console.log("in click trigger");
+    $.get("https://maps.googleapis.com/maps/api/js?key=AIzaSyCCisTmeb2rhu32O7n2M6RF1iS6xWFbEH4", findLoc);
+  });
+</script>
+
 </html>

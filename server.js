@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-var mongoose = require('mongoose');
-var http = require('http').Server(app);
+const mongoose = require('mongoose');
+const http = require('http').Server(app);
 const dbquery = require('./dbquery');
 
 const port = process.env.PORT || 4300;
-var io = require('socket.io')(3600);
+const io = require('socket.io')(3600);
 
 io.on('connection', (socket) => {
 
@@ -16,7 +16,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('getloc', (message) => {
-        var room = message.room;
+        let room = message.room;
         io.to(room).emit('loc', message);
     });
 
@@ -24,7 +24,7 @@ io.on('connection', (socket) => {
 });
 
 
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false

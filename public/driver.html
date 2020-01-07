@@ -43,76 +43,7 @@
             </div>
         </div>
     </div>
-<script>
-let bid = "bus";
-//Sending to sendServer
-
-function sendServer() {
-    console.log("");
-    var b_id = document.getElementById("BusNo").value;
-    var sid = document.getElementById("ShiftNo").value;
-    $.post("/UpdateConductorRouteInfo", {
-        BusNo: b_id,
-        Shift: sid
-    }, function(data) {
-        console.log(data);
-        document.getElementById("RouteId").innerHTML = "Your Route ID is " + data;
-        bid = data;
-    });
-}
-
-function sendSMS() {
-    var sid = document.getElementById("Sid").value;
-    $.post("/FindParentSendNotification", {
-        RegNo: sid
-    }, function(data) {
-        console.log("Parent to be sent success SMS " + data);
-        $("#butsid").append(`<br><p>${data}</p>`)
-    });
-}
-
-function start() {
-    var socket = io('http://localhost:3600');
-    socket.emit('new-user', bid);
-    document.getElementById("journey").innerHTML = "Journey Started";
-
-
-    var lat, curLat;
-    var lang, curLang;
-    var dif = 1;
-
-    navigator.geolocation.getCurrentPosition((pos) => {
-        lat = curLat = pos.coords.latitude;
-        lang = curLang = pos.coords.longitude;
-    });
-
-
-    setInterval(function() {
-
-        navigator.geolocation.getCurrentPosition((pos) => {
-            // curLat = pos.coords.latitude+dif++;
-            // curLang = pos.coords.longitude+dif++;
-            curLat++;
-            curLang++;
-        });
-
-        console.log(curLat, curLang);
-
-        //if (Math.abs(curLat - lat) > 0.001 || Math.abs(curLang - lang) > 0.001) {
-        room = bid;
-
-        var position = {
-            lat: curLat,
-            lang: curLang,
-            room: bid
-        }
-        socket.emit('getloc', position);
-
-        $("#Presentloc").html(`${curLat} , ${curLang} , ${room}`);
-        //}
-
-    }, 1000);
-}
+<script src = "driverLogic.js">
 </script>
 </body>
 </html>
