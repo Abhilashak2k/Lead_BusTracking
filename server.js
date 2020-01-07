@@ -4,6 +4,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const http = require('http').Server(app);
 const dbquery = require('./dbquery');
+const notification = require('./notification');
 
 const port = process.env.PORT || 4300;
 const io = require('socket.io')(3600);
@@ -33,6 +34,7 @@ app.use(bodyParser.urlencoded({
 app.post('/FindParentSendNotification', dbquery.FindParentSendNotification);
 app.post('/UpdateConductorRouteInfo', dbquery.UpdateConductorRouteInfo);
 app.post('/UpdateParentRouteInfo', dbquery.UpdateParentRouteInfo);
+app.post('/sendsms',notification.SendSms);
 
 app.use(express.static(path.join(__dirname, 'public')));
 http.listen(port, () => console.log(`App running on ${port}`));
