@@ -3,17 +3,8 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
     <script src="http://localhost:3600/socket.io/socket.io.js"></script>
 </head>
@@ -35,8 +26,8 @@
                 <h1 id="RouteId">Your Route Id Here </h1>
 
                 <br>
-                <button id="journey" onclick="start()">Start Journey</button>
-                <br><br><br>
+                <div id = "journey"><button>Start Journey</button></div>
+                <br><br>
                 <input type="text" placeholder="Student roll number Here" id="Sid">
                 <button onclick="sendSMS()">Submit</button>
                 <p id="butsid"></p>

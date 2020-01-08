@@ -55,6 +55,8 @@ html, body {
 .form-style-6 input[type="button"],
 .form-style-6 button
 {
+  border-radius: 15px;
+  box-shadow: 0 5px #30C29E;
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -70,4 +72,10 @@ html, body {
 .form-style-6 input[type="submit"]:hover,
 .form-style-6 input[type="button"]:hover{
 	background: #2EBC99;
+}
+
+button:active {
+  background-color: #30C29E;
+  box-shadow: 0 5px #30C29E;
+  transform: translateY(2px);
 }

@@ -22,6 +22,13 @@ io.on('connection', (socket) => {
     });
 
     console.log('a user is connected ')
+
+    socket.on('dis-user', (room)=>{
+        io.to(room).emit('dis-user', "Driver disconnecting");
+        console.log("user disconnecting");
+        socket.disconnect();
+        console.log(room);
+    });
 });
 
 

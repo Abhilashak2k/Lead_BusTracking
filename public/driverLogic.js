@@ -1,4 +1,7 @@
 let bid = "bus";
+let socket = null;
+let intervalFunction = null;
+
 //Sending to sendServer
 
 function sendServer() {
@@ -12,6 +15,7 @@ function sendServer() {
         console.log(data);
         document.getElementById("RouteId").innerHTML = "Your Route ID is " + data;
         bid = data;
+        socket = io('http://localhost:3600');
     });
 }
 
@@ -28,12 +32,16 @@ function sendSMS() {
         })
     });
 }
-
-function start() {
-    const socket = io('http://localhost:3600');
+document.getElementById("journey").addEventListener( "click", ()=> {
     socket.emit('new-user', bid);
-    document.getElementById("journey").innerHTML = "Journey Started";
-
+    let journeyElement = document.getElementById("journey");
+    if(!!journeyElement){
+      $("#journey").empty();
+      $("#journey").append('<button id = "endJourney" onclick = "endJourney()" >Journey started. End Journey? </button>');
+      document.getElementById("journey").id= "endJourney";
+      // journeyElement.innerHTML = "Journey Started. End Journey?";
+      // journeyElement.id = "endJourney";
+      // journeyElement = null;
 
     let lat, curLat;
     let lang, curLang;
@@ -44,26 +52,31 @@ function start() {
         lang = curLang = pos.coords.longitude;
     });
 
+    intervalFunction = setInterval(timer, 1000);
 
-    setInterval(function() {
+    function timer(){
 
-            curLat+=0.0001;
-            curLang+=0.0001;
+          curLat+=0.0001;
+          curLang+=0.0001;
 
-        console.log(curLat, curLang);
+      console.log(curLat, curLang);
+      room = bid;
 
-        //if (Math.abs(curLat - lat) > 0.001 || Math.abs(curLang - lang) > 0.001) {
-        room = bid;
+      let position = {
+          lat: curLat,
+          lang: curLang,
+          room: bid
+      }
+      socket.emit('getloc', position);
 
-        let position = {
-            lat: curLat,
-            lang: curLang,
-            room: bid
-        }
-        socket.emit('getloc', position);
+      $("#Presentloc").html(`${curLat} , ${curLang} , ${room}`);
+  }
 
-        $("#Presentloc").html(`${curLat} , ${curLang} , ${room}`);
-        //}
+  }
+});
 
-    }, 1000);
+function endJourney() {
+  document.getElementById("endJourney").innerHTML = "<button>Journey Ended</button>";
+  socket.emit('dis-user', bid);
+  clearInterval(intervalFunction);
 }

@@ -7,9 +7,16 @@ const socket = io('http://localhost:3600');
 function start() {
     socket.emit('new-user', bid);
     socket.on('loc', addMessages);
+    socket.on('dis-user', goBackToHomePage);
+}
+
+function goBackToHomePage(message) {
+  console.log("Time to reload");
+  location.reload();
 }
 
 function addMessages(message) {
+    console.log(message);
     $("#Presentloc").html('')
     g_lati = message.lat;
     g_lang = message.lang;
@@ -29,7 +36,6 @@ function addMessages(message) {
         zoom: 18
       });
       flag++;
-      console.log("here");
     }
 
      marker = new google.maps.Marker({
@@ -39,7 +45,6 @@ function addMessages(message) {
       });
 
       marker.setMap(map);
-
 }
 
 function getRouteId() {
@@ -91,7 +96,6 @@ function findLoc() {
   }
 }
 
-
 function initMap() {
   longi = g_lang;
   lati = g_lati;
@@ -107,7 +111,7 @@ function initMap() {
   var marker = new google.maps.Marker({
     map:map,
     position:{lat:lati, lng: longi},
-    icon:'https://img.icons8.com/color/15/000000/filled-circle.png'
+    icon:'https://img.icons8.com/color/5/000000/filled-circle.png'
   });
 
   marker.setMap(map);
