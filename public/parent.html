@@ -25,7 +25,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <body>
-    <div class="container">
+    <div id = "map">
+      <div class="container">
         <br>
         <div class="form-style-6">
             <h1 class="display-4">Receiving Location at parent</h1>
@@ -39,21 +40,13 @@
             <button id="sendloc" onclick="start()" >Start receiving location</button>
 
         </div>
-        <div id="Presentloc">
-
-        </div>
+      </div>
     </div>
-    <div id = 'map'></div>
 </body>
 
 <script src="parentLogic.js">
 </script>
-<script>
-
-  $("#sendloc").click(function(){
-    console.log("in click trigger");
-    getMap();
-    })
+<script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCCisTmeb2rhu32O7n2M6RF1iS6xWFbEH4&callback=findLoc">
 
 </script>
 

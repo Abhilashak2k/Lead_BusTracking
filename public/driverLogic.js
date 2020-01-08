@@ -25,7 +25,7 @@ function sendSMS() {
         $.post("/sendsms", {message : "Your child has boarded", tosend:  data}, (successMsg)=>{
           console.log(successMsg + "Message sent!");
 
-        } )
+        })
     });
 }
 
@@ -47,8 +47,8 @@ function start() {
 
     setInterval(function() {
 
-            curLat++;
-            curLang++;
+            curLat+=0.0001;
+            curLang+=0.0001;
 
         console.log(curLat, curLang);
 

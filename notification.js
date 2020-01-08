@@ -26,10 +26,8 @@ exports.SendSms = (req,resp)=>{
           console.log(res);
         resp.send(res);
         }
-
     });
-
-    }
+  }
 
 
 exports.sendemail = (req,res)=>{

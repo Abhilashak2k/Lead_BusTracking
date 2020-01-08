@@ -1,6 +1,7 @@
 let map;
 let g_lati, g_lang;
 let bid = "bus";
+let flag=0;
 const socket = io('http://localhost:3600');
 
 function start() {
@@ -13,6 +14,32 @@ function addMessages(message) {
     g_lati = message.lat;
     g_lang = message.lang;
     $("#Presentloc").append(`<p> ${message.lat} , ${message.lang} </p>`);
+
+    //Display on map
+    longi = g_lang;
+    lati = g_lati;
+    console.log("Coordinates recieved by map are " + lati + longi);
+
+    console.log("In initmap function " + lati + longi);
+
+    if(flag==0){
+      $(".container").empty();
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: lati, lng:  longi},
+        zoom: 18
+      });
+      flag++;
+      console.log("here");
+    }
+
+     marker = new google.maps.Marker({
+        map:map,
+        position:{lat:g_lati, lng: g_lang},
+        icon:'https://img.icons8.com/color/15/000000/filled-circle.png'
+      });
+
+      marker.setMap(map);
+
 }
 
 function getRouteId() {
@@ -56,11 +83,35 @@ function getRouteId() {
     })
 }
 
-function getMap() {
-  $.get("/getMapAPI", (data)=>{
-    console.log("************************************");
-    console.log(data);
-    $("#Presentloc").append(`<img>${data}</img>`);
-  })
+function findLoc() {
+
+  var lati, longi;
+  if( navigator.geolocation ){
+    console.log("Browser has location access!!");
+  }
+}
+
+
+function initMap() {
+  longi = g_lang;
+  lati = g_lati;
+  console.log("Coordinates recieved by map are " + lati + longi);
+
+  console.log("In initmap function " + lati + longi);
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: lati, lng:  longi},
+    zoom: 18
+  });
+
+  var marker = new google.maps.Marker({
+    map:map,
+    position:{lat:lati, lng: longi},
+    icon:'https://img.icons8.com/color/15/000000/filled-circle.png'
+  });
+
+  marker.setMap(map);
+
+//update coords
 
 }
