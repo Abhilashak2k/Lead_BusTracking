@@ -11,12 +11,10 @@ function start() {
 }
 
 function goBackToHomePage(message) {
-  console.log("Time to reload");
   location.reload();
 }
 
 function addMessages(message) {
-    console.log(message);
     $("#Presentloc").html('')
     g_lati = message.lat;
     g_lang = message.lang;
@@ -25,9 +23,6 @@ function addMessages(message) {
     //Display on map
     longi = g_lang;
     lati = g_lati;
-    console.log("Coordinates recieved by map are " + lati + longi);
-
-    console.log("In initmap function " + lati + longi);
 
     if(flag==0){
       $(".container").empty();
@@ -57,8 +52,8 @@ function getRouteId() {
             bid = data[0].route_id;
         } else if (data.length > 1) {
 
-            const RouteButton = document.getElementById("RouteButton");
-            RouteButton.parentNode.removeChild(RouteButton);
+            const routeButton = document.getElementById("RouteButton");
+            routeButton.parentNode.removeChild(routeButton);
 
             let html = `<select  id = "DropDown">` +
                 `<option selected hidden style='display:none'>Select Childname</option>`;
@@ -68,14 +63,12 @@ function getRouteId() {
             });
 
             html = html + `</select><button id="Childname">Submit</button>`;
-            console.log(html);
             $("#DropBox").append(html);
 
             $("#Childname").click(function() {
-                let Childname = document.getElementById("DropDown").value;
-                console.log("User has Selected the childname " + Childname);
+                let childname = document.getElementById("DropDown").value;
                 data.forEach(element => {
-                    if (element.name == Childname) {
+                    if (element.name == childname) {
                         document.getElementById("bid").value = "Your Route ID is " + element.route_id;
                         bid = element.route_id;
                     }
@@ -91,17 +84,14 @@ function getRouteId() {
 function findLoc() {
 
   var lati, longi;
-  if( navigator.geolocation ){
-    console.log("Browser has location access!!");
+  if( !navigator.geolocation ){
+    console.log("Browser has no location access!!");
   }
 }
 
 function initMap() {
   longi = g_lang;
   lati = g_lati;
-  console.log("Coordinates recieved by map are " + lati + longi);
-
-  console.log("In initmap function " + lati + longi);
 
   var marker = new google.maps.Marker({
     map:map,
