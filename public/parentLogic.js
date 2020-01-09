@@ -33,7 +33,7 @@ function addMessages(message) {
       $(".container").empty();
       map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: lati, lng:  longi},
-        zoom: 18
+        zoom: 13
       });
       flag++;
     }
@@ -41,7 +41,7 @@ function addMessages(message) {
      marker = new google.maps.Marker({
         map:map,
         position:{lat:g_lati, lng: g_lang},
-        icon:'https://img.icons8.com/color/15/000000/filled-circle.png'
+        icon:'https://img.icons8.com/office/15/000000/marker.png'
       });
 
       marker.setMap(map);
@@ -102,11 +102,6 @@ function initMap() {
   console.log("Coordinates recieved by map are " + lati + longi);
 
   console.log("In initmap function " + lati + longi);
-
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: lati, lng:  longi},
-    zoom: 18
-  });
 
   var marker = new google.maps.Marker({
     map:map,
