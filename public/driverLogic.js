@@ -57,7 +57,7 @@ document.getElementById("journey").addEventListener( "click", ()=> {
         // lat = curLat = pos.coords.latitude;
         // lang = curLang = pos.coords.longitude;
         lat = curLat = obj[0][1]
-        lang = curLang = obj[0][1]
+        lang = curLang = obj[0][0]
     });
 
     intervalFunction = setInterval(timer, 1000);
@@ -65,7 +65,7 @@ document.getElementById("journey").addEventListener( "click", ()=> {
     function timer(){
 
           curLat=obj[i++][1];
-          curLang=obj[i][1];
+          curLang=obj[i][0];
 
           if(i == obj.length-1){
             endJourney();
