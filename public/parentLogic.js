@@ -2,9 +2,20 @@ let map;
 let g_lati, g_lang;
 let bid = "bus";
 let flag=0;
+
+var marker;
 const socket = io('http://localhost:3600');
 
+var poly;
+
+
 function start() {
+   poly  = new google.maps.Polyline({
+    geodesic: true,
+    strokeColor: 'blue',
+    strokeOpacity: 1.0,
+    strokeWeight: 2
+  });
     socket.emit('new-user', bid);
     socket.on('loc', addMessages);
     socket.on('dis-user', goBackToHomePage);
@@ -33,13 +44,26 @@ function addMessages(message) {
       flag++;
     }
 
-     marker = new google.maps.Marker({
-        map:map,
-        position:{lat:g_lati, lng: g_lang},
-        icon:'https://img.icons8.com/office/15/000000/marker.png'
-      });
+    var latlng = new google.maps.LatLng(lati, longi);
+  console.log("In initmap function " + lati + longi);
 
-      marker.setMap(map);
+  marker = new google.maps.Marker({
+    map:map,
+    position:latlng,
+    icon:'https://img.icons8.com/color/5/000000/filled-circle.png'
+  });
+
+  marker.setMap(map);
+    
+
+      var path = poly.getPath();
+
+      var latlng = new google.maps.LatLng(lati, longi);
+      marker.setPosition(latlng);
+      path.push(latlng);
+      poly.setMap(map);
+
+    
 }
 
 function getRouteId() {
@@ -93,6 +117,16 @@ function initMap() {
   longi = g_lang;
   lati = g_lati;
 
+  console.log("Coordinates recieved by map are " + lati + longi);
+  
+//   marker = new google.maps.Marker({
+//     position: latlng,
+//     map: map,
+//     title: "Bus location!",
+    
+// });
+
+  
   var marker = new google.maps.Marker({
     map:map,
     position:{lat:lati, lng: longi},
@@ -101,6 +135,10 @@ function initMap() {
 
   marker.setMap(map);
 
+
+  
 //update coords
 
 }
+
+
