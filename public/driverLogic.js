@@ -44,9 +44,6 @@ document.getElementById("journey").addEventListener( "click", ()=> {
       $("#journey").empty();
       $("#journey").append('<button id = "endJourney" onclick = "endJourney()" >Journey started. End Journey? </button>');
       document.getElementById("journey").id= "endJourney";
-      // journeyElement.innerHTML = "Journey Started. End Journey?";
-      // journeyElement.id = "endJourney";
-      // journeyElement = null;
 
     let lat, curLat;
     let lang, curLang;

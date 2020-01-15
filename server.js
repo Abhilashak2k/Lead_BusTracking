@@ -21,7 +21,7 @@ io.on('connection', (socket) => {
         io.to(room).emit('loc', message);
     });
 
-    console.log('a user is connected ')
+    console.log('a user is connected ');
 
     socket.on('dis-user', (room)=>{
         io.to(room).emit('dis-user', "Driver disconnecting");

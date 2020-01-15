@@ -38,12 +38,12 @@ exports.UpdateParentRouteInfo = (req, res) => {
     poolDB.getConnection((err, conn) => {
 
         conn.query(`SELECT *
-                    FROM   student
-                    WHERE  _id IN (SELECT child_id
-                                  FROM   parent_child
-                                  WHERE  parent_id = (SELECT _id
-                                                      FROM   parent
-                                                      WHERE  phone = "${parent_no}")) `,
+                    FROM studentSELECT *
+                    FROM student
+                      JOIN parent_child ON student._id = parent_child.child_id
+                      JOIN parent ON parent._id = parent_child.parent_id
+                      AND phone = "${parent_no}"
+                     `,
             (err, data) => {
                 if (err)
                     console.log("There is an error " + err);
@@ -61,10 +61,10 @@ exports.FindParentSendNotification = (req, res) => {
     console.log("Entered roll no is " + regNo);
     poolDB.getConnection((err, conn) => {
         conn.query(`SELECT phone
-                FROM parent
-                WHERE _id = (SELECT parent_id
-                          	 FROM parent_child
-                      			 WHERE child_id = ${regNo} )`,
+                    FROM parent
+                      JOIN parent_child ON parent._id = parent_child.parent_id
+                      AND child_id = $ { regNo }
+                    `,
             (err, data) => {
                 if (err)
                     console.log("There is an error " + err);

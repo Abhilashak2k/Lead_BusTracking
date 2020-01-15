@@ -54,7 +54,7 @@ function addMessages(message) {
   });
 
   marker.setMap(map);
-    
+
 
       var path = poly.getPath();
 
@@ -63,7 +63,7 @@ function addMessages(message) {
       path.push(latlng);
       poly.setMap(map);
 
-    
+
 }
 
 function getRouteId() {
@@ -118,15 +118,15 @@ function initMap() {
   lati = g_lati;
 
   console.log("Coordinates recieved by map are " + lati + longi);
-  
+
 //   marker = new google.maps.Marker({
 //     position: latlng,
 //     map: map,
 //     title: "Bus location!",
-    
+
 // });
 
-  
+
   var marker = new google.maps.Marker({
     map:map,
     position:{lat:lati, lng: longi},
@@ -136,9 +136,7 @@ function initMap() {
   marker.setMap(map);
 
 
-  
+
 //update coords
 
 }
-
-
