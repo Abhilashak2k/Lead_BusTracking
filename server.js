@@ -2,11 +2,10 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const http = require('http').Server(app);
-const dbquery = require('./dbquery');
-const notification = require('./notification');
-
 const port = process.env.PORT || 4300;
 const io = require('socket.io')(3600);
+const db_route = require('./routes/dbquery');
+const sms_route = require('./routes/notification');
 
 io.on('connection', (socket) => {
 
@@ -37,10 +36,9 @@ app.use(bodyParser.urlencoded({
     extended: false
 }))
 
-app.post('/FindParentSendNotification', dbquery.FindParentSendNotification);
-app.post('/UpdateConductorRouteInfo', dbquery.UpdateConductorRouteInfo);
-app.post('/UpdateParentRouteInfo', dbquery.UpdateParentRouteInfo);
-app.post('/sendsms',notification.SendSms);
+app.use('/' , db_route);
+app.use('/' , sms_route);
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 http.listen(port, () => console.log(`App running on ${port}`));
