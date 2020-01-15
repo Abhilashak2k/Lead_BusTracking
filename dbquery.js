@@ -37,8 +37,7 @@ exports.UpdateParentRouteInfo = (req, res) => {
 
     poolDB.getConnection((err, conn) => {
 
-        conn.query(`SELECT *
-                    FROM studentSELECT *
+        conn.query(`SELECT student.name, student.route_id
                     FROM student
                       JOIN parent_child ON student._id = parent_child.child_id
                       JOIN parent ON parent._id = parent_child.parent_id
