@@ -56,7 +56,7 @@ document.getElementById("journey").addEventListener( "click", ()=> {
         lang = curLang = obj[0][0]
     });
 
-    intervalFunction = setInterval(timer, 1000);
+    intervalFunction = setInterval(timer, 50);
 
     function timer(){
 
