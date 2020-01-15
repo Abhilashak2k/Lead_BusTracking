@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 const http = require('http').Server(app);
 const port = process.env.PORT || 4300;
-const route = require('./controller/routes');
+const route = require('./routes/routes');
 const socket = require('./controller/socket');
 const bodyParser = require('body-parser');
 

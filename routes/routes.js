@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const dbquery = require('./dbquery');
-const notification = require('./notification');
+const dbquery = require('../controller/dbquery');
+const notification = require('../controller/notification');
 
 app.post('/FindParentSendNotification', dbquery.FindParentSendNotification);
 app.post('/UpdateConductorRouteInfo', dbquery.UpdateConductorRouteInfo);
