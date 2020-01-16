@@ -16,15 +16,15 @@ exports.UpdateConductorRouteInfo = (req, res) => {
 
     poolDB.getConnection(function(err, conn) {
 
-        conn.query(`SELECT route_id
+        conn.query(`SELECT _id
                     FROM   route
                     WHERE  bus_id = ${busno}
                     AND    shift = "${shift}"`, (err, data) => {
             if (err)
                 console.log(err);
             else {
-                console.log("SQL query result is " + data[0].route_id);
-                res.send((data[0].route_id).toString());
+                console.log("SQL query result is " + data[0]._id);
+                res.send((data[0]._id).toString());
             }
         })
     });
