@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const dbquery = require('../controller/dbquery');
+const dbquery = require('../data/dbquery');
 const notification = require('../controller/notification');
 
 app.post('/FindParentSendNotification', dbquery.FindParentSendNotification);

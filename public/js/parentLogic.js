@@ -56,7 +56,8 @@ function addMessages(message) {
       busMarker = new google.maps.Marker({
         map:map,
         position:latlng,
-        icon:'https://img.icons8.com/color/15/000000/bus2.png'
+        icon:'https://img.icons8.com/color/15/000000/bus2.png',
+        draggable : true
       });
 
     }
