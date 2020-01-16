@@ -7,5 +7,7 @@ app.post('/FindParentSendNotification', dbquery.FindParentSendNotification);
 app.post('/UpdateConductorRouteInfo', dbquery.UpdateConductorRouteInfo);
 app.post('/UpdateParentRouteInfo', dbquery.UpdateParentRouteInfo);
 app.post('/sendsms',notification.SendSms);
+// app.post('/getAllStopsOnRoute',());
+// app.post('/getAllPrevCoors',());
 
 module.exports = app;

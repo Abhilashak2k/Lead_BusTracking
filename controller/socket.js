@@ -2,9 +2,9 @@ const express = require('express');
 const app = express();
 const socketio = require('socket.io')
 const io = socketio(3600);
-
+console.log("In socket module");
 io.on('connection', module.exports = function callBack(socket){
-
+console.log("here");
     socket.on('new-user', (room) => {
         socket.join(room)
 
