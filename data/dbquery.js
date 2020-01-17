@@ -1,13 +1,4 @@
-const mysql = require('mysql');
-
-const poolDB = mysql.createPool({
-    connectionLimit: 50,
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "bustracking"
-});
-
+const poolDB = require('./dbconnection')
 
 exports.UpdateConductorRouteInfo = (req, res) => {
 
