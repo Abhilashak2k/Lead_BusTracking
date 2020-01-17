@@ -1,4 +1,4 @@
-const poolDB = require('./dbconnection')
+const poolDB = require('./dbconnection').poolDB;
 
 exports.UpdateConductorRouteInfo = (req, res) => {
 

@@ -37,28 +37,36 @@ function addMessages(message) {
     lati = g_lati;
 
     if(flag==0){
-      $(".container").empty();
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: lati, lng:  longi},
-        zoom: 13
-      });
-      flag++;
-      for (var i = 0; i < stopCoords.length; i+=4) {
-        busMarker = new google.maps.Marker({
-            map:map,
-            position: new google.maps.LatLng(stopCoords[i][1],stopCoords[i][0]),
-            icon: "https://img.icons8.com/emoji/15/000000/bus-stop-emoji.png"
+        $(".container").empty();
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: lati, lng:  longi},
+          zoom: 13
         });
-        busMarker.setMap(map);
 
-      }
+        busMarker = new google.maps.Marker({
+          map:map,
+          position:latlng,
+          icon:'https://img.icons8.com/color/15/000000/bus2.png',
+          draggable : true
+        });
 
-      busMarker = new google.maps.Marker({
-        map:map,
-        position:latlng,
-        icon:'https://img.icons8.com/color/15/000000/bus2.png',
-        draggable : true
-      });
+        $.post('/GetAllStops', {route_id:bid}, (data)=>{
+
+              stopCoords = data;
+              for (var i = 0; i < stopCoords.length; i++) {
+		                //console.log(stopCoords[i].split(",")[0],stopCoords[i].split(",")[1]);
+                    stopMarker = new google.maps.Marker({
+                      map:map,
+                      position: new google.maps.LatLng(stopCoords[i].split(",")[0],stopCoords[i].split(",")[1]),
+                      icon: "https://img.icons8.com/emoji/15/000000/bus-stop-emoji.png"
+                });
+                stopMarker.setMap(map);
+              }
+
+
+        })
+
+        flag++;
 
     }
 
@@ -129,15 +137,6 @@ function findLoc() {
 function initMap() {
   longi = g_lang;
   lati = g_lati;
-
-
-//   busMarker = new google.maps.Marker({
-//     position: latlng,
-//     map: map,
-//     title: "Bus location!",
-
-// });
-
 
   var busMarker = new google.maps.Marker({
     map:map,

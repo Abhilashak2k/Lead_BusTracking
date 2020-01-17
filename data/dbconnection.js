@@ -7,6 +7,3 @@ exports.poolDB = mysql.createPool({
     password: "",
     database: "bustracking"
 });
-
-exports.mysql = mysql;
-
