@@ -18,8 +18,15 @@ function start() {
     strokeOpacity: 1.0,
     strokeWeight: 2
   });
-
+    
+    loadprepoint();
+    $(".container").empty();
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 29.138843565944068, lng : 72.85085678100586},
+      zoom: 13
+    });
     socket.emit('new-user', bid);
+    
     socket.on('loc', addMessages);
     socket.on('dis-user', goBackToHomePage);
 }
@@ -31,17 +38,14 @@ function goBackToHomePage(message) {
 function addMessages(message) {
     g_lati = message.lat;
     g_lang = message.lang;
-
+console.log(message);
     //Display on map
     longi = g_lang;
     lati = g_lati;
 
     if(flag==0){
-      $(".container").empty();
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: lati, lng:  longi},
-        zoom: 13
-      });
+      map.setCenter({lat: lati, lng: longi});
+      //map.center = {lat: lati, lng: longi},
       flag++;
       for (var i = 0; i < stopCoords.length; i+=4) {
         busMarker = new google.maps.Marker({
@@ -147,5 +151,35 @@ function initMap() {
 
 
 //update coords
+
+}
+
+
+function loadprepoint(){
+  var path = poly.getPath();
+$.post('/GetCurrentTrail',{room_id:bid},function(data,status){
+
+  if(status!=404){
+
+    console.log(data);
+
+    data.forEach((value)=>{
+      let res = value.split(",");
+       let latlng = new google.maps.LatLng(res[0], res[1]);
+       console.log(latlng)
+       path.push(latlng);
+       poly.setMap(map);
+      
+    });
+
+    
+  }
+
+});
+
+
+  
+
+  
 
 }

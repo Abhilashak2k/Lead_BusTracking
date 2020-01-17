@@ -1,5 +1,5 @@
-const poolDB = require('./dbconnection')
-
+const DB = require('./dbconnection')
+const poolDB = DB.poolDB;
 exports.UpdateConductorRouteInfo = (req, res) => {
 
     let busno = req.body.BusNo;
