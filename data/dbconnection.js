@@ -8,5 +8,5 @@ exports.poolDB = mysql.createPool({
     database: "bustracking"
 });
 
-exports.mysql = mysql;
+
 
