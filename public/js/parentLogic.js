@@ -25,7 +25,7 @@ function start() {
 }
 
 function goBackToHomePage(message) {
-  location.reload();
+  alert("Waiting for Driver response");
 }
 
 function addMessages(message) {
@@ -81,7 +81,10 @@ function getRouteId() {
     $.post("/UpdateParentRouteInfo", {
         PhNo: phNo
     }, (data) => {
-        if (data.length == 1) {
+        if(data == null){
+          alert("Enter correct Credentials!");
+        }
+        else if (data.length == 1) {
             document.getElementById("bid").value = "Your Route ID is " + data[0].route_id;
             bid = data[0].route_id;
         } else if (data.length > 1) {

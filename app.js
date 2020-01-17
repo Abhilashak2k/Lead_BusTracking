@@ -16,3 +16,5 @@ app.use(bodyParser.urlencoded({
 app.use('/', route);
 app.use(express.static(path.join(__dirname, './public')));
 http.listen(port, () => console.log(`App running on ${port}`));
+
+module.exports = app;
