@@ -19,7 +19,14 @@ function start() {
     strokeWeight: 2
   });
 
+    loadprepoint();
+    $(".container").empty();
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 29.138843565944068, lng : 72.85085678100586},
+      zoom: 13
+    });
     socket.emit('new-user', bid);
+
     socket.on('loc', addMessages);
     socket.on('dis-user', goBackToHomePage);
 }
@@ -31,25 +38,14 @@ function goBackToHomePage(message) {
 function addMessages(message) {
     g_lati = message.lat;
     g_lang = message.lang;
-
+console.log(message);
     //Display on map
     longi = g_lang;
     lati = g_lati;
 
     if(flag==0){
-        $(".container").empty();
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: lati, lng:  longi},
-          zoom: 13
-        });
-
-        busMarker = new google.maps.Marker({
-          map:map,
-          position:latlng,
-          icon:'https://img.icons8.com/color/15/000000/bus2.png',
-          draggable : true
-        });
-
+      map.setCenter({lat: lati, lng: longi});
+      flag++;
         $.post('/GetAllStops', {route_id:bid}, (data)=>{
 
               stopCoords = data;
@@ -69,6 +65,7 @@ function addMessages(message) {
         flag++;
 
     }
+
 
     var latlng = new google.maps.LatLng(lati, longi);
       busMarker.setPosition(latlng);
@@ -150,4 +147,28 @@ function initMap() {
 
 //update coords
 
+}
+
+
+function loadprepoint(){
+  var path = poly.getPath();
+$.post('/GetCurrentTrail',{room_id:bid},function(data,status){
+
+  if(status!=404){
+
+    console.log(data);
+
+    data.forEach((value)=>{
+      let res = value.split(",");
+       let latlng = new google.maps.LatLng(res[0], res[1]);
+       console.log(latlng)
+       path.push(latlng);
+       poly.setMap(map);
+
+    });
+
+
+  }
+
+});
 }
