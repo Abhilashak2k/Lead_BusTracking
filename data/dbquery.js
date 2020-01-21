@@ -12,7 +12,6 @@ exports.UpdateConductorRouteInfo = (req, res) => {
     });
 }
 
-
 exports.UpdateParentRouteInfo = (req, res) => {
 
     let parent_no = req.body.PhNo;
@@ -22,6 +21,15 @@ exports.UpdateParentRouteInfo = (req, res) => {
       res.send(data);
     });
 
+}
+
+exports.getStopsFromDB = (req, res) =>{
+  let routeid = req.body.route_id;
+
+  fireQuery.getStopsFromDB(routeid, (data)=>{
+    console.log("Stops from db " + data);
+    res.send(data);
+  })
 }
 
 exports.FindParentSendNotification = (req, res) => {

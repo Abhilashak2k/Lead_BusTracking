@@ -7,6 +7,7 @@ const notification = require('../controller/notification');
 app.post('/FindParentSendNotification', dbquery.FindParentSendNotification);
 app.post('/UpdateConductorRouteInfo', dbquery.UpdateConductorRouteInfo);
 app.post('/UpdateParentRouteInfo', dbquery.UpdateParentRouteInfo);
+app.post('/getStopsFromDB', dbquery.getStopsFromDB);
 app.post('/GetAllStops',redisquery.getallstops);
 app.post('/GetCurrentTrail',redisquery.getcurrenttrail);
 

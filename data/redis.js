@@ -1,19 +1,5 @@
-const poolDB = require('./dbconnection').poolDB;
-const redis = require('redis');
-
-const client = redis.createClient();
-var multi = client.multi();
-
-client.on('connect', function () {
-    console.log('connected');
-})
-
-client.on('error', function () {
-    console.log('error socket');
-})
-
-console.time('here');
-
+const dbquery = require('./dbquery');
+const client = require('./redisClient');
 
 exports.getallstops = (req, res) => {
 
@@ -25,38 +11,14 @@ exports.getallstops = (req, res) => {
             res.send(result);
 
         }
-        else {
+        else{
 
-
-            poolDB.getConnection(function (err, conn) {
-
-                conn.query(`SELECT route_id,lat,lang from stop_route INNER JOIN bus_stops WHERE stop_route.stop_id=bus_stops._id AND route_id= ${routeid}`, (err, data) => {
-                    if (err) throw err;
-                    else {
-                        let routearray = [];
-                        data.forEach((value) => {
-                            let latlng = value.lat + "," + value.lang;
-                            routearray.push(latlng);
-                        })
-
-                        routearray.forEach((values) => {
-                            multi.rpush(routename, values);
-                        })
-
-                        multi.exec();
-
-                        res.send(routearray);
-                        console.timeEnd('here');
-                    }
-                })
-            });
-
+            dbquery.getStopsFromDB(req, res);
         }
+
     });
 
 }
-
-
 exports.getcurrenttrail = (req,res)=>{
 
     let roomid = req.body.room_id;

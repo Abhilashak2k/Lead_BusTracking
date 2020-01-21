@@ -1,5 +1,33 @@
 const DB = require('./dbconnection')
 const poolDB = DB.poolDB;
+const client = require('./redisClient');
+var multi = client.multi();
+
+exports.getStopsFromDB = (routeid, returnData)=>{
+  let routename = "r" + routeid;
+      poolDB.getConnection(function (err, conn) {
+
+          conn.query(`SELECT route_id,lat,lang from stop_route INNER JOIN bus_stops WHERE stop_route.stop_id=bus_stops._id AND route_id= ${routeid}`, (err, data) => {
+              if (err) throw err;
+              else {
+                  let routearray = [];
+                  data.forEach((value) => {
+                      let latlng = value.lat + "," + value.lang;
+                      routearray.push(latlng);
+                  })
+
+                  routearray.forEach((values) => {
+                      multi.rpush(routename, values);
+                  })
+
+                  multi.exec();
+
+                  returnData(routearray);
+                  console.timeEnd('here in fireQuery from redis');
+              }
+          })
+      });
+}
 
 exports.UpdateConductorRouteInfo=(busno, shift, returnData)=>{
   poolDB.getConnection(function(err, conn) {

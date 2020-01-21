@@ -6,7 +6,7 @@ const port = process.env.PORT || 4300;
 const route = require('./routes/routes');
 const socket = require('./controller/socket');
 const bodyParser = require('body-parser');
-
+const dbconnection = require('./data/dbconnection');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
