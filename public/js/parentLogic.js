@@ -19,53 +19,48 @@ function start() {
     strokeWeight: 2
   });
 
-    loadprepoint();
-    $(".container").empty();
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 29.138843565944068, lng : 72.85085678100586},
-      zoom: 13
-    });
     socket.emit('new-user', bid);
-
     socket.on('loc', addMessages);
     socket.on('dis-user', goBackToHomePage);
 }
 
 function goBackToHomePage(message) {
-  alert("Waiting for Driver response");
+  location.reload();
 }
 
 function addMessages(message) {
     g_lati = message.lat;
     g_lang = message.lang;
-console.log(message);
+
     //Display on map
     longi = g_lang;
     lati = g_lati;
 
     if(flag==0){
-      map.setCenter({lat: lati, lng: longi});
+      $(".container").empty();
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: lati, lng:  longi},
+        zoom: 13
+      });
       flag++;
-        $.post('/GetAllStops', {route_id:bid}, (data)=>{
+      for (var i = 0; i < stopCoords.length; i+=4) {
+        busMarker = new google.maps.Marker({
+            map:map,
+            position: new google.maps.LatLng(stopCoords[i][1],stopCoords[i][0]),
+            icon: "https://img.icons8.com/emoji/15/000000/bus-stop-emoji.png"
+        });
+        busMarker.setMap(map);
 
-              stopCoords = data;
-              for (var i = 0; i < stopCoords.length; i++) {
-		                //console.log(stopCoords[i].split(",")[0],stopCoords[i].split(",")[1]);
-                    stopMarker = new google.maps.Marker({
-                      map:map,
-                      position: new google.maps.LatLng(stopCoords[i].split(",")[0],stopCoords[i].split(",")[1]),
-                      icon: "https://img.icons8.com/emoji/15/000000/bus-stop-emoji.png"
-                });
-                stopMarker.setMap(map);
-              }
+      }
 
-
-        })
-
-        flag++;
+      busMarker = new google.maps.Marker({
+        map:map,
+        position:latlng,
+        icon:'https://img.icons8.com/color/15/000000/bus2.png',
+        draggable : true
+      });
 
     }
-
 
     var latlng = new google.maps.LatLng(lati, longi);
       busMarker.setPosition(latlng);
@@ -86,10 +81,7 @@ function getRouteId() {
     $.post("/UpdateParentRouteInfo", {
         PhNo: phNo
     }, (data) => {
-        if(data == null){
-          alert("Enter correct Credentials!");
-        }
-        else if (data.length == 1) {
+        if (data.length == 1) {
             document.getElementById("bid").value = "Your Route ID is " + data[0].route_id;
             bid = data[0].route_id;
         } else if (data.length > 1) {
@@ -135,6 +127,15 @@ function initMap() {
   longi = g_lang;
   lati = g_lati;
 
+
+//   busMarker = new google.maps.Marker({
+//     position: latlng,
+//     map: map,
+//     title: "Bus location!",
+
+// });
+
+
   var busMarker = new google.maps.Marker({
     map:map,
     position:{lat:lati, lng: longi},
@@ -147,28 +148,4 @@ function initMap() {
 
 //update coords
 
-}
-
-
-function loadprepoint(){
-  var path = poly.getPath();
-$.post('/GetCurrentTrail',{room_id:bid},function(data,status){
-
-  if(status!=404){
-
-    console.log(data);
-
-    data.forEach((value)=>{
-      let res = value.split(",");
-       let latlng = new google.maps.LatLng(res[0], res[1]);
-       console.log(latlng)
-       path.push(latlng);
-       poly.setMap(map);
-
-    });
-
-
-  }
-
-});
 }

@@ -70,8 +70,6 @@ exports.getcurrenttrail = (req,res)=>{
         else {
             res.sendStatus(404);
         }
-
-
 });
 
 }
