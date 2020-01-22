@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "node ./node_modules/mocha/bin/mocha"
+    "test": "mocha"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "mysql": "^2.17.1",
     "redis": "^2.8.0",
     "request": "^2.88.0",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
+    "supertest": "^4.0.2"
   }
 }

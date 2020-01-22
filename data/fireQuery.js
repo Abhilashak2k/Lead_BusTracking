@@ -23,7 +23,7 @@ exports.getStopsFromDB = (routeid, returnData)=>{
                   multi.exec();
 
                   returnData(routearray);
-                  console.timeEnd('here in fireQuery from redis');
+                  console.log('here in fireQuery from redis');
               }
           })
       });

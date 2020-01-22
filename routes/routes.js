@@ -8,8 +8,8 @@ app.post('/FindParentSendNotification', dbquery.FindParentSendNotification);
 app.post('/UpdateConductorRouteInfo', dbquery.UpdateConductorRouteInfo);
 app.post('/UpdateParentRouteInfo', dbquery.UpdateParentRouteInfo);
 app.post('/getStopsFromDB', dbquery.getStopsFromDB);
-app.post('/GetAllStops',redisquery.getallstops);
-app.post('/GetCurrentTrail',redisquery.getcurrenttrail);
+app.post('/GetAllStops',redisquery.GetAllStops);
+app.post('/GetCurrentTrail',redisquery.GetCurrentTrail);
 
 app.post('/sendsms',notification.SendSms);
 

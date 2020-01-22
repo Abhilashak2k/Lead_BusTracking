@@ -1,7 +1,6 @@
 const redis = require('redis');
 
 const client = redis.createClient();
-var multi = client.multi();
 
 client.on('connect', function () {
     console.log('connected');
