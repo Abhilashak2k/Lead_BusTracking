@@ -27,26 +27,14 @@ exports.FindAllParentsSendNotification = (req, res) => {
           console.log(result);
           res.send(result);
         });
-
-      // request.post({
-      //     url: '/sendSMS',
-      //     body: {message : "Hi your child has boarded", tosend : data},
-      //     json: true
-      //   },function(err,result,body){
-      //     if(err)console.log(err);
-      //     else{
-      //       res.send(result);
-      //     }
-      // });
-
     })
 }
 
 exports.getConductorDetailsUsingRoute = (req, res) => {
   let routeid = req.body.route_id;
-
-
-
+  fireQuery.getConductorDetailsUsingRoute(routeid, (data)=>{
+    res.send(data);
+  })
 }
 
 exports.UpdateParentRouteInfo = (req, res) => {

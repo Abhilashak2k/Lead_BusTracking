@@ -3,6 +3,22 @@ const poolDB = DB.poolDB;
 const client = require('./redisClient');
 var multi = client.multi();
 
+exports.getConductorDetailsUsingRoute = (routeid, returnData) => {
+  poolDB.getConnection((err, conn)=>{
+    if(err) throw err;
+    else{
+      console.log(routeid);
+      conn.query(`SELECT *
+                  FROM student
+                  WHERE route_id = ${routeid}
+                  ORDER BY stop_id`, (err, data)=>{
+                    console.log(data + "here in fireQuery");
+                    returnData(data);
+                  })
+    }
+  });
+}
+
 exports.FindAllParentsSendNotification = (childList, returnData) => {
     let ch_list = "(";
     for(let i=0;i<childList.length-1;i++){
