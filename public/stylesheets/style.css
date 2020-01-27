@@ -6,7 +6,110 @@ html, body {
   margin: 0;
   padding: 0;
 }
-.form-style-6{
+input, button, submit { border:none; }
+button {
+  all: unset;
+}
+.form-driver{
+	font: 95% Arial, Helvetica, sans-serif;
+	max-width: 360px;
+	margin: 0px auto;
+	padding: 0px;
+	background: #F7F7F7;
+}
+.form-driver input{
+  background: #FFFFFF;
+  border: 1.17021px solid #000000;
+  box-sizing: border-box;
+  width: 328px;
+  height: 48px;
+  left: 16px;
+  top: 402px;
+}
+
+.form-driver input[type="text"]{
+  padding-left: 5.75%;
+  padding-right: 13.42%;
+
+
+  /* Title / T4_Title_Samll_14 */
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  /* identical to box height, or 143% */
+
+  text-transform: capitalize;
+
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.form-driver input:focus{
+  color: rgba(0, 0, 0, 0.8);
+}
+
+#input-fields{
+  background: #ffffff;
+  padding-top:53px;
+  padding-bottom: 69px;
+  padding-left: 16px;
+  padding-right : 16px;
+}
+
+button{
+  color: #FFFFFF;
+  background: #000000;
+  height: 55px;
+  width: 360px;
+  border: none;
+  align-items: center;
+}
+
+#Submit-button{
+  border: none;
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+button:active{
+  background-color: rgb(0, 50, 77);
+}
+
+.footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:60px;   /* Height of the footer */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .form-style-6{
 	font: 95% Arial, Helvetica, sans-serif;
 	max-width: 400px;
 	margin: 10px auto;
@@ -78,4 +181,4 @@ button:active {
   background-color: #30C29E;
   box-shadow: 0 5px #30C29E;
   transform: translateY(2px);
-}
+} */

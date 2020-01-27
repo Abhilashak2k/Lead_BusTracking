@@ -42,7 +42,7 @@ function addMessages(message) {
       flag++;
       $.post('/getallstops', {route_id : bid}, (data)=>{
         //console.log(data);
-        for (var i = 0; i < data.length; i++) {
+        for (var i = 0; i < data.length; i+=4) {
           let stopCoords = data[i].split(',');
           console.log(stopCoords[0], stopCoords[1]);
           stopMarker = new google.maps.Marker({

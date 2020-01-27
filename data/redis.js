@@ -27,9 +27,9 @@ exports.GetCurrentTrail = (req,res)=>{
         if (result && result.length) {
             console.log("from redis");
             res.send(result);
-
         }
         else {
+            console.log("nothing in redis... so oops!");
             res.sendStatus(404);
         }
 });
