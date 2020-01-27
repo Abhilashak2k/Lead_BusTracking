@@ -11,7 +11,6 @@ exports.FindAllParentsSendNotification = (childList, returnData) => {
 
     ch_list = ch_list + childList[childList.length-1] + ")";
 
-    console.log(ch_list);
     poolDB.getConnection((err, conn)=>{
       conn.query(`SELECT phone
                   FROM parent
@@ -20,7 +19,6 @@ exports.FindAllParentsSendNotification = (childList, returnData) => {
                   (err, data)=>{
                     if(err) throw err;
                     else{
-                      console.log(data);
                       returnData(data);
                     }
                   })

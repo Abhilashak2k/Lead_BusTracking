@@ -1,7 +1,9 @@
 const DB = require('./dbconnection')
 const fireQuery = require('./fireQuery');
 const request = require('request');
+const app = require('../app');
 const poolDB = DB.poolDB;
+const notification = require('../controller/notification');
 exports.UpdateConductorRouteInfo = (req, res) => {
 
     let busno = req.body.BusNo;
@@ -15,10 +17,28 @@ exports.UpdateConductorRouteInfo = (req, res) => {
 
 exports.FindAllParentsSendNotification = (req, res) => {
     let childList =req.body.rollList;
-
+    console.log(notification);
     fireQuery.FindAllParentsSendNotification(childList, (data)=>{
-      console.log(data);
-      res.send(data);
+      for (var i = 0; i < data.length; i++) {
+        data[i] = data[i].phone;
+      }
+
+      let result = notification.SendSms( "Hi your child has boarded", data , (result)=>{
+          console.log(result);
+          res.send(result);
+        });
+
+      // request.post({
+      //     url: '/sendSMS',
+      //     body: {message : "Hi your child has boarded", tosend : data},
+      //     json: true
+      //   },function(err,result,body){
+      //     if(err)console.log(err);
+      //     else{
+      //       res.send(result);
+      //     }
+      // });
+
     })
 }
 

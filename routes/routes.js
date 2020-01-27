@@ -13,6 +13,4 @@ app.post('/getStopsFromDB', dbquery.getStopsFromDB);
 app.post('/GetAllStops',redisquery.GetAllStops);
 app.post('/GetCurrentTrail',redisquery.GetCurrentTrail);
 
-app.post('/sendsms',notification.SendSms);
-
 module.exports = app;
