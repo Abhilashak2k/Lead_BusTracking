@@ -3,11 +3,40 @@ const poolDB = DB.poolDB;
 const client = require('./redisClient');
 var multi = client.multi();
 
+exports.FindAllParentsSendNotification = (childList, returnData) => {
+    let ch_list = "(";
+    for(let i=0;i<childList.length-1;i++){
+      ch_list = ch_list + childList[i] + ",";
+    }
+
+    ch_list = ch_list + childList[childList.length-1] + ")";
+
+    console.log(ch_list);
+    poolDB.getConnection((err, conn)=>{
+      conn.query(`SELECT phone
+                  FROM parent
+                  JOIN parent_child ON parent._id = parent_child.parent_id
+                  AND child_id IN ${ch_list}`,
+                  (err, data)=>{
+                    if(err) throw err;
+                    else{
+                      console.log(data);
+                      returnData(data);
+                    }
+                  })
+    })
+}
+
 exports.getStopsFromDB = (routeid, returnData)=>{
   let routename = "r" + routeid;
       poolDB.getConnection(function (err, conn) {
 
-          conn.query(`SELECT route_id,lat,lang from stop_route INNER JOIN bus_stops WHERE stop_route.stop_id=bus_stops._id AND route_id= ${routeid}`, (err, data) => {
+          conn.query(`SELECT route_id,lat,lang
+                      FROM stop_route
+                      INNER JOIN bus_stops
+                      WHERE stop_route.stop_id=bus_stops._id
+                      AND route_id= ${routeid}`,
+                      (err, data) => {
               if (err) throw err;
               else {
                   let routearray = [];

@@ -5,7 +5,9 @@ const redisquery = require('../data/redis');
 const notification = require('../controller/notification');
 
 app.post('/FindParentSendNotification', dbquery.FindParentSendNotification);
+app.post('/FindAllParentsSendNotification', dbquery.FindAllParentsSendNotification);
 app.post('/UpdateConductorRouteInfo', dbquery.UpdateConductorRouteInfo);
+app.post('/getConductorDetailsUsingRoute', dbquery.getConductorDetailsUsingRoute);
 app.post('/UpdateParentRouteInfo', dbquery.UpdateParentRouteInfo);
 app.post('/getStopsFromDB', dbquery.getStopsFromDB);
 app.post('/GetAllStops',redisquery.GetAllStops);

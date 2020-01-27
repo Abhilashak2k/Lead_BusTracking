@@ -1,5 +1,6 @@
 const DB = require('./dbconnection')
 const fireQuery = require('./fireQuery');
+const request = require('request');
 const poolDB = DB.poolDB;
 exports.UpdateConductorRouteInfo = (req, res) => {
 
@@ -10,6 +11,22 @@ exports.UpdateConductorRouteInfo = (req, res) => {
       console.log(data);
       res.send(data[0]._id.toString());
     });
+}
+
+exports.FindAllParentsSendNotification = (req, res) => {
+    let childList =req.body.rollList;
+
+    fireQuery.FindAllParentsSendNotification(childList, (data)=>{
+      console.log(data);
+      res.send(data);
+    })
+}
+
+exports.getConductorDetailsUsingRoute = (req, res) => {
+  let routeid = req.body.route_id;
+
+
+
 }
 
 exports.UpdateParentRouteInfo = (req, res) => {
@@ -39,6 +56,7 @@ exports.FindParentSendNotification = (req, res) => {
     fireQuery.FindParentSendNotification(regNo, (data)=>{
       console.log(data);
       res.send(data.phone);
+
     });
 
 }
