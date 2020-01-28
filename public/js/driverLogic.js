@@ -36,15 +36,13 @@ function startJourney(){
 }
 
 function loadNavPage() {
-  var k = parent.document.URL.substring(parent.document.URL.indexOf('=')+1, parent.document.URL.length);
-  console.log(k)
-  bid=k;
+  bid= parent.document.URL.substring(parent.document.URL.indexOf('=')+1, parent.document.URL.length);
+  console.log(bid)
   socket = io('http://localhost:3600');
 
       socket.emit('new-user', bid);
       let journeyElement = document.getElementById("journey");
       if(!!journeyElement){
-        $("#journey").empty();
         $("#journey").append('<button id = "endJourney" onclick = "endJourney()" >Journey started. End Journey? </button>');
         document.getElementById("journey").id= "endJourney";
 
@@ -89,5 +87,5 @@ function endJourney() {
   document.getElementById("endJourney").innerHTML = "<button>Journey Ended</button>";
   socket.emit('dis-user', bid);
   clearInterval(intervalFunction);
-  location.reload();
+  window.location = "http://localhost:4300/driverLanding.html";
 }

@@ -8,11 +8,10 @@ exports.getConductorDetailsUsingRoute = (routeid, returnData) => {
     if(err) throw err;
     else{
       console.log(routeid);
-      conn.query(`SELECT *
+      conn.query(`SELECT _id, name, stop_id
                   FROM student
                   WHERE route_id = ${routeid}
                   ORDER BY stop_id`, (err, data)=>{
-                    console.log(data + "here in fireQuery");
                     returnData(data);
                   })
     }
@@ -20,6 +19,7 @@ exports.getConductorDetailsUsingRoute = (routeid, returnData) => {
 }
 
 exports.FindAllParentsSendNotification = (childList, returnData) => {
+  console.log(childList);
     let ch_list = "(";
     for(let i=0;i<childList.length-1;i++){
       ch_list = ch_list + childList[i] + ",";
