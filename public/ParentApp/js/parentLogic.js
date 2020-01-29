@@ -16,8 +16,6 @@ function start() {
     strokeWeight: 2
   });
 
-
-    console.log(bid);
     socket.emit('new-user', bid);
     socket.on('loc', addMessages);
     socket.on('dis-user', goBackToHomePage);
@@ -28,16 +26,16 @@ function goBackToHomePage(message) {
 }
 
 function addMessages(message) {
-  console.log(bid);
     g_lati = message.lat;
     g_lang = message.lang;
 
     //Display on map
     longi = g_lang;
     lati = g_lati;
-
+    console.log(message);
     if(flag==0){
       $(".container").empty();
+
       map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: lati, lng:  longi},
         zoom: 13
@@ -45,7 +43,7 @@ function addMessages(message) {
       flag++;
       $.post('/getallstops', {route_id : bid}, (data)=>{
         //console.log(data);
-        for (var i = 0; i < data.length; i++) {
+        for (var i = 0; i < data.length; i+=8) {
           let stopCoords = data[i].split(',');
           console.log(stopCoords[0], stopCoords[1]);
           stopMarker = new google.maps.Marker({
@@ -89,7 +87,6 @@ function getRouteId() {
     }, (data) => {
         if (data.length == 1) {
             bid = data[0].route_id;
-            console.log(bid);
             $("#Submit-button").replaceWith('<button id="Submit-button" onclick="start()" >Start receiving location</button>');
         } else if (data.length > 1) {
 
@@ -124,8 +121,6 @@ function getRouteId() {
 }
 
 function findLoc() {
-
-  var lati, longi;
   if( !navigator.geolocation ){
     alert("Browser has no location access!!");
   }

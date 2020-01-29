@@ -8,10 +8,16 @@ exports.getConductorDetailsUsingRoute = (routeid, returnData) => {
     if(err) throw err;
     else{
       console.log(routeid);
-      conn.query(`SELECT _id, name, stop_id
-                  FROM student
-                  WHERE route_id = ${routeid}
-                  ORDER BY stop_id`, (err, data)=>{
+      conn.query(`SELECT
+                    student._id,
+                    student.name as sname,
+                    student.stop_id,
+                    bus_stops.name
+                FROM
+                    student
+                JOIN bus_stops WHERE student.route_id = ${routeid} AND student.stop_id = bus_stops._id
+                ORDER BY
+                    stop_id`, (err, data)=>{
                     returnData(data);
                   })
     }

@@ -38,20 +38,20 @@ exports.getConductorDetailsUsingRoute = (req, res) => {
 
       let obj = {
         stop_id:data[i].stop_id,
+        stop_name:data[i].name,
         child_ids : [data[i]._id],
-        child_names : [data[i].name]
+        child_names : [data[i].sname]
       }
 
       while(i<data.length-1 && data[i].stop_id == data[i+1].stop_id){
         obj.child_ids.push(data[i+1]._id);
-        obj.child_names.push(data[i+1].name);
+        obj.child_names.push(data[i+1].sname);
         i++;
       }
 
       arr.push(obj);
 
     }
-    console.log(arr);
     res.send(arr);
   })
 }
