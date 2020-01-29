@@ -13,11 +13,11 @@ button {
   height: 182px;
   margin: 0px auto;
 }
-.verticalLine {
+/* .verticalLine {
   padding-left: 12px;
   border-left: 2px solid #000000;
-}
-.line:before, .line:after {
+} */
+/* .line:before, .line:after {
   content: '';
   height: 10px;
   width: 10px;
@@ -25,7 +25,7 @@ button {
   float: left;
   background: #000;
   margin-top: -3px;
-}
+} */
 
 .oneChild{
   padding-left:15px;
