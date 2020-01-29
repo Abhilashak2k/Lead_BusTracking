@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<style>
+  #map {
+    height: 100%;
+  }
+</style>
+<head>
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="http://localhost:3600/socket.io/socket.io.js"></script>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<body>
+    <div id = "map">
+      <div class="container">
+        <br>
+        <div class="land-header">
+          <img src="img\driverheader.svg" alt="Parent holding child">
+        </div>
+
+        <div class="form-driver">
+
+          <div id="input-fields">
+            <input type="text" placeholder="Enter Mobile Number" id="PhNo">
+            <p id="DropBox"></p>
+          </div>
+
+          <button type="button" id="Submit-button" onclick="getRouteId()">Submit</button>
+
+        </div>
+      </div>
+    </div>
+</body>
+
+<script src="js/parentLogic.js">
+</script>
+<script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCCisTmeb2rhu32O7n2M6RF1iS6xWFbEH4&callback=findLoc">
+
+</script>
+
+</html>
