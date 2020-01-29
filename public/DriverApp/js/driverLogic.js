@@ -35,6 +35,23 @@ function sendSMS() {
 
 function loadNavPage() {
   bid= parent.document.URL.substring(parent.document.URL.indexOf('=')+1, parent.document.URL.length);
+
+  loadcards();
+  sendlocation();
+
+}
+
+
+function loadcards(){
+
+  $.post("/getConductorDetailsUsingRoute",{route_id:bid},function(data,err){
+    console.log(data[0],data[1]);
+  })
+}
+
+
+
+function sendlocation(){
   console.log(bid)
   socket = io('http://localhost:3600');
 
