@@ -13,10 +13,8 @@ function sendServer() {
         BusNo: b_id,
         Shift: sid
     }, function(data) {
-
-        document.getElementById("RouteId").innerHTML = "Your Route ID is " + data;
         bid = data;
-        socket = io('http://localhost:3600');
+        document.getElementById("RouteId").innerHTML = '<button id = "journey" onclick = "startJourney()">Start Journey?</button>';
     });
 }
 
@@ -32,59 +30,62 @@ function sendSMS() {
         })
     });
 }
-document.getElementById("journey").addEventListener( "click", ()=> {
-  if(bid=="bus"){
-    alert("Enter Corrrect Credentials!");
-  }
-  else{
-    socket.emit('new-user', bid);
-    let journeyElement = document.getElementById("journey");
-    if(!!journeyElement){
-      $("#journey").empty();
-      $("#journey").append('<button id = "endJourney" onclick = "endJourney()" >Journey started. End Journey? </button>');
-      document.getElementById("journey").id= "endJourney";
 
-    let lat, curLat;
-    let lang, curLang;
-    let dif = 1;
-
-    navigator.geolocation.getCurrentPosition((pos) => {
-        // lat = curLat = pos.coords.latitude;
-        // lang = curLang = pos.coords.longitude;
-        lat = curLat = obj[0][1]
-        lang = curLang = obj[0][0]
-    });
-
-    intervalFunction = setInterval(timer, 1000);
-
-    function timer(){
-
-          curLat=obj[i++][1];
-          curLang=obj[i][0];
-
-          if(i == obj.length-1){
-            clearInterval(intervalFunction);
-          }
-
-      room = bid;
-
-      let position = {
-          lat: curLat,
-          lang: curLang,
-          room: bid
-      }
-      socket.emit('getloc', position);
-
-      $("#Presentloc").html(`${curLat} , ${curLang} , ${room}`);
-  }
-
-  }
+function startJourney(){
+  window.location = "http://localhost:4300/driverNav.html?RouteId=" + bid;
 }
-});
+
+function loadNavPage() {
+  bid= parent.document.URL.substring(parent.document.URL.indexOf('=')+1, parent.document.URL.length);
+  console.log(bid)
+  socket = io('http://localhost:3600');
+
+      socket.emit('new-user', bid);
+      let journeyElement = document.getElementById("journey");
+      if(!!journeyElement){
+        $("#journey").append('<button id = "endJourney" onclick = "endJourney()" >Journey started. End Journey? </button>');
+        document.getElementById("journey").id= "endJourney";
+
+      let lat, curLat;
+      let lang, curLang;
+      let dif = 1;
+
+      navigator.geolocation.getCurrentPosition((pos) => {
+          // lat = curLat = pos.coords.latitude;
+          // lang = curLang = pos.coords.longitude;
+          lat = curLat = obj[0][1]
+          lang = curLang = obj[0][0]
+      });
+
+      intervalFunction = setInterval(timer, 1000);
+
+      function timer(){
+
+            curLat=obj[i++][1];
+            curLang=obj[i][0];
+
+            if(i == obj.length-1){
+              clearInterval(intervalFunction);
+            }
+
+        room = bid;
+
+        let position = {
+            lat: curLat,
+            lang: curLang,
+            room: bid
+        }
+        socket.emit('getloc', position);
+
+        console.log(position);
+    }
+
+    }
+}
 
 function endJourney() {
   document.getElementById("endJourney").innerHTML = "<button>Journey Ended</button>";
   socket.emit('dis-user', bid);
   clearInterval(intervalFunction);
-  location.reload();
+  window.location = "http://localhost:4300/driverLanding.html";
 }

@@ -3,7 +3,23 @@ const poolDB = DB.poolDB;
 const client = require('./redisClient');
 var multi = client.multi();
 
+exports.getConductorDetailsUsingRoute = (routeid, returnData) => {
+  poolDB.getConnection((err, conn)=>{
+    if(err) throw err;
+    else{
+      console.log(routeid);
+      conn.query(`SELECT _id, name, stop_id
+                  FROM student
+                  WHERE route_id = ${routeid}
+                  ORDER BY stop_id`, (err, data)=>{
+                    returnData(data);
+                  })
+    }
+  });
+}
+
 exports.FindAllParentsSendNotification = (childList, returnData) => {
+  console.log(childList);
     let ch_list = "(";
     for(let i=0;i<childList.length-1;i++){
       ch_list = ch_list + childList[i] + ",";
@@ -11,7 +27,6 @@ exports.FindAllParentsSendNotification = (childList, returnData) => {
 
     ch_list = ch_list + childList[childList.length-1] + ")";
 
-    console.log(ch_list);
     poolDB.getConnection((err, conn)=>{
       conn.query(`SELECT phone
                   FROM parent
@@ -20,7 +35,6 @@ exports.FindAllParentsSendNotification = (childList, returnData) => {
                   (err, data)=>{
                     if(err) throw err;
                     else{
-                      console.log(data);
                       returnData(data);
                     }
                   })

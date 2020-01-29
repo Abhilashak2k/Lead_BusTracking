@@ -2,13 +2,11 @@ require('dotenv').config();
 const request = require('request');
 
 
-exports.SendSms = (req,resp)=>{
+exports.SendSms = (mssg, phonenumberList, returnData)=>{
 
-    var mssg = req.body.message;
-    var phonenumber = req.body.tosend;
+    returnData(`Sending ${mssg} to phone numbers ${phonenumberList}`);
 
-
-    //   var obj = {
+    //   let obj = {
     //   apikey:process.env.SMSAPIKEY,  //Put your way2sms api key
     //   secret:process.env.SMSSECRET,  // Put your way2sms secret key
     //   usetype:"stage",
@@ -29,12 +27,3 @@ exports.SendSms = (req,resp)=>{
     //     }
     // });
   }
-
-
-exports.sendemail = (req,res)=>{
-
-
-    //sending email logic
-
-    res.send('EMAIL notification send');
-}

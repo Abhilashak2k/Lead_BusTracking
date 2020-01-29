@@ -1,6 +1,3 @@
-#map {
-  height: 100%;
-}
 html, body {
   height: 100%;
   margin: 0;
@@ -10,9 +7,141 @@ input, button, submit { border:none; }
 button {
   all: unset;
 }
+.topBox{
+  background-color: black;
+  width: 360px;
+  height: 182px;
+  margin: 0px auto;
+}
+.verticalLine {
+  padding-left: 12px;
+  border-left: 2px solid #000000;
+}
+.line:before, .line:after {
+  content: '';
+  height: 10px;
+  width: 10px;
+  border-radius: 10px;
+  float: left;
+  background: #000;
+  margin-top: -3px;
+}
+
+.oneChild{
+  padding-left:15px;
+  padding-top: 5px;
+  padding-right: 25px;
+  width: 225px;
+  height: 29px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+
+  color: rgba(0, 0, 0, 0.7);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.round {
+  position: relative;
+  float: right;
+}
+.round label {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 28px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 28px;
+}
+
+.round label:after {
+  border: 2px solid #fff;
+  border-top: none;
+  border-right: none;
+  content: "";
+  height: 6px;
+  left: 7px;
+  opacity: 0;
+  position: absolute;
+  top: 8px;
+  transform: rotate(-45deg);
+  width: 12px;
+}
+
+.round input[type="checkbox"] {
+  visibility: hidden;
+}
+
+.round input[type="checkbox"]:checked + label {
+  background-color: #66bb6a;
+  border-color: #66bb6a;
+}
+
+.round input[type="checkbox"]:checked + label:after {
+  opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.Start-Marker{
+  padding-left: 12px;
+  padding-top: 18px;
+  width: 69px;
+  height: 20px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: capitalize;
+  color: #000000;
+}
+#time-name{
+  padding-left: 12px;
+}
 .form-driver{
 	font: 95% Arial, Helvetica, sans-serif;
-	max-width: 360px;
 	margin: 0px auto;
 	padding: 0px;
 	background: #F7F7F7;
@@ -30,19 +159,12 @@ button {
 .form-driver input[type="text"]{
   padding-left: 5.75%;
   padding-right: 13.42%;
-
-
-  /* Title / T4_Title_Samll_14 */
-
   font-family: Poppins;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
-  /* identical to box height, or 143% */
-
   text-transform: capitalize;
-
   color: rgba(0, 0, 0, 0.4);
 }
 
@@ -60,7 +182,7 @@ button {
 * {
   box-sizing: border-box;
 }
-button{
+#Submit-button{
   position:absolute;
   bottom:0;
   width:100%;
@@ -72,110 +194,6 @@ button{
   text-align:  center;
 }
 
-#Submit-button{
-  border: none;
-  padding-left: 18px;
-  padding-right: 18px;
-  padding-top: 16px;
-  padding-bottom: 16px;
-
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 24px;
-
-  display: flex;
-  align-items: center;
-  text-align: center;
-  text-transform: capitalize;
-}
-
 button:active{
   background-color: rgb(0, 50, 77);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-/* .form-style-6{
-	font: 95% Arial, Helvetica, sans-serif;
-	max-width: 400px;
-	margin: 10px auto;
-	padding: 16px;
-	background: #F7F7F7;
-}
-.form-style-6 h1{
-	background: #43D1AF;
-	padding: 20px 0;
-	font-size: 140%;
-	font-weight: 300;
-	text-align: center;
-	color: #fff;
-	margin: -16px -16px 16px -16px;
-}
-.form-style-6 input,
-.form-style-6 textarea,
-.form-style-6 select
-{
-	-webkit-transition: all 0.30s ease-in-out;
-	-moz-transition: all 0.30s ease-in-out;
-	-ms-transition: all 0.30s ease-in-out;
-	-o-transition: all 0.30s ease-in-out;
-	outline: none;
-	box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	width: 100%;
-	background: #fff;
-	margin-bottom: 4%;
-	border: 1px solid #ccc;
-	padding: 3%;
-	color: #555;
-	font: 95% Arial, Helvetica, sans-serif;
-}
-.form-style-6 input:focus,
-.form-style-6 textarea:focus,
-.form-style-6 select:focus
-{
-	box-shadow: 0 0 5px #43D1AF;
-	padding: 3%;
-	border: 1px solid #43D1AF;
-}
-
-.form-style-6 input[type="submit"],
-.form-style-6 input[type="button"],
-.form-style-6 button
-{
-  border-radius: 15px;
-  box-shadow: 0 5px #30C29E;
-	box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	width: 100%;
-	padding: 3%;
-	background: #43D1AF;
-	border-bottom: 2px solid #30C29E;
-	border-top-style: none;
-	border-right-style: none;
-	border-left-style: none;
-	color: #fff;
-}
-.form-style-6 input[type="submit"]:hover,
-.form-style-6 input[type="button"]:hover{
-	background: #2EBC99;
-}
-
-button:active {
-  background-color: #30C29E;
-  box-shadow: 0 5px #30C29E;
-  transform: translateY(2px);
-} */
