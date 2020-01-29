@@ -1,37 +1,49 @@
-
 * {
-  
+
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-
-.container {
-  
-  width: 100%;
-  margin: 0 auto;
-
-  
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
 }
+
+input,
+button,
+submit {
+  border: none;
+}
+
+button {
+  all: unset;
+}
+
 img {
   max-width: 100%;
   max-height: 100%;
 }
-.header {
-  top:0;
+
+.container {
+
+  width: 100%;
+  margin: 0 auto;
+
+
+}
+
+/* for landing page */
+
+.land-header {
+  top: 0;
   width: 100%;
   height: 40%;
 }
 
 
-
-
-input, button, submit { border:none; }
-button {
-  all: unset;
-}
-
-.form-driver input{
+.form-driver input {
   background: #FFFFFF;
   border: 1.17021px solid #000000;
   box-sizing: border-box;
@@ -41,51 +53,45 @@ button {
   top: 50%;
 }
 
-.form-driver input[type="text"]{
+.form-driver input[type="text"] {
+  margin-top: 5%;
   padding-left: 5.75%;
   padding-right: 13.42%;
-
-
-  /* Title / T4_Title_Samll_14 */
-
   font-family: Poppins;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
-  /* identical to box height, or 143% */
-
   text-transform: capitalize;
 
   color: rgba(0, 0, 0, 0.4);
 }
 
-.form-driver input:focus{
+.form-driver input:focus {
   color: rgba(0, 0, 0, 0.8);
 }
 
-#input-fields{
+#input-fields {
   background: #ffffff;
-  padding-top:53px;
+  padding-top: 53px;
   padding-bottom: 53px;
   padding-left: 16px;
-  padding-right : 16px;
+  padding-right: 16px;
 }
-* {
-  box-sizing: border-box;
-}
-button{
- 
-  bottom:0;
-  width:100%;
+
+
+#Submit-button {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   color: #FFFFFF;
   background: #000000;
   height: 55px;
   border: none;
-  text-align:  center;
+  text-align: center;
 }
 
-#Submit-button{
+#Submit-button {
   border: none;
   padding-left: 18px;
   padding-right: 18px;
@@ -98,12 +104,19 @@ button{
   font-size: 16px;
   line-height: 24px;
 
-  display: flex;
+
   align-items: center;
   text-align: center;
   text-transform: capitalize;
 }
 
-button:active{
+button:active {
   background-color: rgb(0, 50, 77);
 }
+
+
+
+
+/* for navigation page */
+
+
