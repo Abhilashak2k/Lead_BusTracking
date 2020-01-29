@@ -13,9 +13,14 @@ function sendServer() {
         BusNo: b_id,
         Shift: sid
     }, function(data) {
-        bid = data;
-        window.location = "driverNav.html?RouteId=" + bid;
-});
+      console.log(data.length);
+        if(!data)
+          alert("Enter correct credentials!!");
+        else{
+          bid = data;
+          window.location = "driverNav.html?RouteId=" + bid;
+        }
+      });
 }
 
 function sendSMS() {
@@ -30,8 +35,6 @@ function sendSMS() {
         })
     });
 }
-
-
 
 function loadNavPage() {
   bid= parent.document.URL.substring(parent.document.URL.indexOf('=')+1, parent.document.URL.length);
@@ -85,5 +88,5 @@ function endJourney() {
   document.getElementById("endJourney").innerHTML = "<button>Journey Ended</button>";
   socket.emit('dis-user', bid);
   clearInterval(intervalFunction);
-  window.location = "http://localhost:4300/driverLanding.html";
+  window.location = "http://localhost:4300/DriverApp/driverLanding.html";
 }
