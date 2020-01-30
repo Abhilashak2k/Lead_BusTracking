@@ -24,8 +24,9 @@ exports.getConductorDetailsUsingRoute = (routeid, returnData) => {
   });
 }
 
-exports.FindAllParentsSendNotification = (childList, returnData) => {
-  console.log(childList);
+exports.FindAllParentsSendNotification = (childList, n_childList, returnData) => {
+  console.log(childList, n_childList);
+
     let ch_list = "(";
     for(let i=0;i<childList.length-1;i++){
       ch_list = ch_list + childList[i] + ",";
@@ -33,15 +34,35 @@ exports.FindAllParentsSendNotification = (childList, returnData) => {
 
     ch_list = ch_list + childList[childList.length-1] + ")";
 
+    //childList created not time for n_childList for use inside the query
+
+    let n_ch_list = "(";
+
+    for(let i=0;i<n_childList.length-1;i++){
+      n_ch_list = n_ch_list + n_childList[i] + ",";
+    }
+
+    n_ch_list = n_ch_list + n_childList[n_childList.length-1] + ")";
+
     poolDB.getConnection((err, conn)=>{
       conn.query(`SELECT phone
                   FROM parent
                   JOIN parent_child ON parent._id = parent_child.parent_id
                   AND child_id IN ${ch_list}`,
                   (err, data)=>{
-                    if(err) throw err;
+                    if(err) console.error();
                     else{
-                      returnData(data);
+                      conn.query(`SELECT phone
+                                  FROM parent
+                                  JOIN parent_child ON parent._id = parent_child.parent_id
+                                  AND child_id IN ${n_ch_list}`,
+                                  (err, n_data)=>{
+                                    if(err) console.error();
+                                    else{
+                                      console.log( n_data,  "n firequery data");
+                                      returnData(data, n_data);
+                                    }
+                                  })
                     }
                   })
     })

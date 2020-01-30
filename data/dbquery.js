@@ -17,14 +17,22 @@ exports.UpdateConductorRouteInfo = (req, res) => {
 
 exports.FindAllParentsSendNotification = (req, res) => {
     let childList =req.body.rollList;
-    fireQuery.FindAllParentsSendNotification(childList, (data)=>{
+    let n_childList =req.body.n_rollList;
+    fireQuery.FindAllParentsSendNotification(childList, n_childList, (data, n_data)=>{
       for (var i = 0; i < data.length; i++) {
         data[i] = data[i].phone;
       }
 
-      let result = notification.SendSms( "Hi your child has boarded", data , (result)=>{
-          console.log(result);
-          res.send(result);
+      for (var i = 0; i < n_data.length; i++) {
+        n_data[i] = n_data[i].phone;
+      }
+
+      console.log("in dbquery", data, n_data);
+
+      notification.SendSmsNotif( data , n_data,  (result, n_result)=>{
+          console.log(result, n_result);
+          let finalResult = result+n_result;
+          res.send(finalResult);
         });
     })
 }
