@@ -2,32 +2,33 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="stylesheets/stylenav.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <script src="http://localhost:3600/socket.io/socket.io.js"></script>
+  <script src="http://localhost:3600/socket.io/socket.io.js"></script>
 </head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <body onload="loadNavPage()">
 
-  <div class="container">
+  <div class="body-container">
     <div class="nav-header">
-      Route id is : 100
+      Route id is : 
     </div>
-    <div class="stop-card-1">
-
+    <div class="dynamic-card">
+     
     </div>
 
     <div class="nav-footer">
-      <button id = "endJourney" onclick = "endJourney()" >Journey started. End Journey </button>
+      <button id="endJourney" onclick="endJourney()">End Journey </button>
     </div>
-    
+
 
 
   </div>
 </body>
-<script src = "js/driverLogic.js">
+<script src="js/driverLogic.js">
 </script>
+
 </html>

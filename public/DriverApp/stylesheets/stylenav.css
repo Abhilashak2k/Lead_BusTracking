@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
+
 *{
     margin:0;
     padding:0;
@@ -15,15 +11,16 @@ body{
 
 .nav-header{
 top:0;
-height: 10rem;
+height: 5rem;
 background-color: black;
 color:white;
 text-align: center;
+font-family: ;
 padding-top: 5%;
 font-style: normal;
   font-weight: 200;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 24px;
+  line-height: 44px;
 
 
 
@@ -127,57 +124,3 @@ margin-left: 2rem;; */
   text-transform: capitalize;
   box-shadow: 0px 4px 10px rgba(214, 218, 221, 0.5);
 }
-
-</style>
-</head>
-<body>
-
-    <div class="body-container">
-        <div class="nav-header">
-          Route id is : 100
-        </div>
-        <div class="card">
-
-            <div class="stopname">
-            <h4>Andheri </h4>
-            </div>
-              
-              <div class="container">
-                 <label for="checkbox-1" class="chkbox">Anil</label>
-            <input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" /> 
-            <hr>
-              </div>
-              
-               <div class="container">
-                 <label for="checkbox-1" class="chkbox">Anil</label>
-            <input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" /> 
-            <hr>
-              </div>
-              
-              <div class="container">
-                 <label for="checkbox-1" class="chkbox">Anil</label>
-            <input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" /> 
-            <hr>
-              </div>
-              
-              <div class="updatestatus">
-              
-              <button class="button0 button1">Update </button>
-              </div>
-              
-            </div>
-            
-    
-        <div class="nav-footer">
-          <button id = "endJourney" onclick = "endJourney()" >End Journey </button>
-        </div>
-        
-    
-    
-      </div>
-
-
-
-
-</body>
-</html> 
