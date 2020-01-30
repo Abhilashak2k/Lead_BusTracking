@@ -176,7 +176,7 @@ function updateForNotification(_id) {
 
   console.log(selectedlist);
 
-   $.post('/FindAllParentSendNotification',{rolllist:selectedlist, n_rolllist:selectedlist},function(res){
+   $.post('/FindAllParentsSendNotification',{rollList:selectedlist, n_rollList:notselectedlist},function(res){
    console.log(res);
    })
    
