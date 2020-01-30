@@ -40,10 +40,11 @@ img {
 
 /* for landing page */
 
-.land-header {
+.parent-header {
   top: 0;
   width: 100%;
   height: 40%;
+  margin-top: -25px;
 }
 
 
