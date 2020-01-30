@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+*{
+    margin:0;
+    padding:0;
+    
+}
+body{
+    background-color: #fafafa;
+    
+}
+
+.nav-header{
+top:0;
+height: 10rem;
+background-color: black;
+color:white;
+text-align: center;
+padding-top: 5%;
+font-style: normal;
+  font-weight: 200;
+  font-size: 16px;
+  line-height: 24px;
+
+
+
+  align-items: center;
+  text-align: center;
+  text-transform: capitalize;
+
+}   
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 86%;
+  margin: 4% 7%;
+  padding-bottom:7%;
+  position:relative;
+  font-family: Poppins;
+font-style: normal;
+font-weight: normal;
+  background-color: white;
+}
+
+.chkbox {
+    
+    
+}
+
+hr{
+border: 1px dashed rgba(0, 0, 0, 0.2);;
+
+}
+
+input[type="checkbox"] {
+float:right
+}
+
+.container {
+  padding: 8px 16px;
+  font-family: Poppins;
+font-style: normal;
+font-weight: normal;
+  background-color: white;
+}
+
+.stopname{
+
+margin:10px;
+background-color: white;
+}
+
+.updatestatus{
+position: absolute;
+right: 0;
+bottom: 0;
+/* margin-right:5px;
+margin-left: 2rem;; */
+
+}
+
+.button0 {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  
+  margin: 0.2rem 0.2rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: white;
+  font-size: 10px;
+  color: black;
+  border: 1px solid #7964E8;
+  border-radius: 4px;
+  padding: 0.5rem 0.5rem;
+  
+}
+
+#endJourney{
+
+  bottom: 0;
+  width: 100%;
+  color: #FFFFFF;
+  background: #1BBF5D;
+  height: 55px;
+  border: none;
+  text-align: center;
+  
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+
+
+  align-items: center;
+  text-align: center;
+  text-transform: capitalize;
+  box-shadow: 0px 4px 10px rgba(214, 218, 221, 0.5);
+}
+
+</style>
+</head>
+<body>
+
+    <div class="body-container">
+        <div class="nav-header">
+          Route id is : 100
+        </div>
+        <div class="card">
+
+            <div class="stopname">
+            <h4>Andheri </h4>
+            </div>
+              
+              <div class="container">
+                 <label for="checkbox-1" class="chkbox">Anil</label>
+            <input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" /> 
+            <hr>
+              </div>
+              
+               <div class="container">
+                 <label for="checkbox-1" class="chkbox">Anil</label>
+            <input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" /> 
+            <hr>
+              </div>
+              
+              <div class="container">
+                 <label for="checkbox-1" class="chkbox">Anil</label>
+            <input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" /> 
+            <hr>
+              </div>
+              
+              <div class="updatestatus">
+              
+              <button class="button0 button1">Update </button>
+              </div>
+              
+            </div>
+            
+    
+        <div class="nav-footer">
+          <button id = "endJourney" onclick = "endJourney()" >End Journey </button>
+        </div>
+        
+    
+    
+      </div>
+
+
+
+
+</body>
+</html> 

@@ -72,7 +72,7 @@ img {
 }
 
 #input-fields {
-  background: #ffffff;
+  background: #fafafa;
   padding-top: 53px;
   padding-bottom: 53px;
   padding-left: 16px;
@@ -120,3 +120,8 @@ button:active {
 /* for navigation page */
 
 
+.land-header {
+  top: 0;
+  width: 100%;
+  height: 40%;
+}
