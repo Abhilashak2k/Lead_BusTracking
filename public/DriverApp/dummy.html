@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>jQuery Get Values of Selected Checboxes</title>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
+<style>
+.chkbox {
+    float:left;
+    /* padding-right: 20%; */
+    font-weight: bold;
+}
+
+</style>
+<script>
+    $(document).ready(function() {
+        $("button").click(function(){
+           var _id = $(this).attr("id");
+            var favorite = [];
+            var u=[];
+            $.each($("input[id="+_id+"]:checked"), function(){            
+                favorite.push($(this).val());
+            });
+            $.each($("input[id="+_id+"]:not(:checked)"), function(){            
+                u.push($(this).val());
+            });
+            
+            alert("My fvrt are " + favorite.join(", ")+"\n My not favourite sports are: " + u.join(", ") );
+        });
+    });
+</script>
+</head>
+<body><div class="pretty p-icon p-round p-smooth">
+    
+    <div class="state p-success">
+        <i class="icon mdi mdi-check"></i>
+        <label>Tuesday</label>
+    </div>
+    <input type="checkbox" />
+</div>
+
+<div class="pretty p-default p-round">
+    <input id="b" type="checkbox" value="100" > 
+    <div class="state p-success-o">
+        <label>Anil</label>
+    </div>
+</div>
+    
+
+
+<div class="controlgroup">
+   
+   
+    <label for="checkbox-1" class="chkbox">Anil</label>
+<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
+
+</div>
+        <h3>Select your favorite sports:</h3>
+        <div class="pretty p-default p-round">
+        <label><input id="b" type="checkbox" value="100" > Anil</label>
+    </div>
+        <label><input id="b" type="checkbox" value="200" > Arjun</label>
+        <label><input id="b" type="checkbox" value="300" > Kapil</label>
+        <label><input id="b" type="checkbox" value="boxing" > Boxing</label>
+        <label><input id="b" type="checkbox" value="racing" > Racing</label>
+        <label><input id="b" type="checkbox" value="swimming" > Swimming</label>
+        <br>
+        <button id="b" type="button">Get Values</button>
+    
+    <h3>Select your favorite sports:</h3>
+        <label><input id="a" type="checkbox" value="football" > Footballlll</label>
+        <label><input id="a" type="checkbox" value="baseball" > Baseball</label>
+        <label><input id="a" type="checkbox" value="cricket" > Cricket</label>
+        <label><input id="a" type="checkbox" value="boxing" > Boxing</label>
+        <label><input id="a" type="checkbox" value="racing" > Racing</label>
+        <label><input id="a" type="checkbox" value="swimming" > Swimming</label>
+        <br>
+        <button id="a" type="button">Get Values</button>
+    
+     <h3>Select your favorite sports:</h3>
+        <label><input id="c" type="checkbox" value="football" > Footballlll</label>
+        <label><input id="c" type="checkbox" value="baseball" > Baseball</label>
+        <label><input id="c" type="checkbox" value="cricket" > Cricket</label>
+        <label><input id="c" type="checkbox" value="boxing" > Boxing</label>
+        <label><input id="c" type="checkbox" value="racing" > Racing</label>
+        <label><input id="c" type="checkbox" value="swimming" > Swimming</label>
+        <br>
+        <button id="c" type="button">Get Values</button>
+   
+</body>
+</html>                            
