@@ -10,7 +10,7 @@ const dbconnection = require('./data/dbconnection');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: false
+  extended: false
 }))
 
 app.use('/', route);

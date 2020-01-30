@@ -2,9 +2,12 @@ require('dotenv').config();
 const request = require('request');
 
 
-exports.SendSms = (mssg, phonenumberList, returnData)=>{
+exports.SendSmsNotif = ( boarded, n_boarded, returnData)=>{
 
-    returnData(`Sending ${mssg} to phone numbers ${phonenumberList}`);
+    let mssg = "Your child has successfully boarded";
+    let n_mssg = "Your child has  not boarded";
+
+    returnData(`Sending ${mssg} to phone numbers ${boarded}`, `Sending ${n_mssg} to phone numbers ${n_boarded}`);
 
     //   let obj = {
     //   apikey:process.env.SMSAPIKEY,  //Put your way2sms api key
