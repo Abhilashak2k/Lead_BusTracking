@@ -2,7 +2,7 @@
 Description: An application developed to enable parents of school going children to track their buses real time as well as receive SMS notification informing them about successful and unsuccessful boarding by their children.  
 
 ## Installation:  
-1.	Clone the repository and run npm init
+1.	Clone the repository and run npm i
 2.	Run node app.js or npm test
 3.	Parent Side UI address : http://localhost:4300/ParentApp/parentLanding.html
 4.	Driver Side UI address : http://localhost:4300/DriverApp/driverLanding.html
