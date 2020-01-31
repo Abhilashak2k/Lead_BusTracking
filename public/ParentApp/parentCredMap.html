@@ -18,16 +18,18 @@
     <div id = "map">
       <div class="container">
         <br>
-        <div class="form-style-6">
-            <h1 class="display-4">Receiving Location at parent</h1>
-            <br>
+        <div class="parent-header">
+          <img src="img\parent.jpg" alt="Parent holding child">
+        </div>
+
+        <div class="form-driver">
+
+          <div id="input-fields">
             <input type="text" placeholder="Enter Mobile Number" id="PhNo">
             <p id="DropBox"></p>
-            <button onclick="getRouteId()" id="RouteButton">What is my Route ID</button>
-            <br><br>
-            <input type="text" id="bid" name="" placeholder="Enter Route ID if you know it">
-            <br><br>
-            <button id="sendloc" onclick="start()" >Start receiving location</button>
+          </div>
+
+          <button type="button" id="Submit-button" onclick="getRouteId()">Submit</button>
 
         </div>
       </div>

@@ -11,10 +11,10 @@ chai.use(chaiHttp);
 const describe = mocha.describe
 
 describe('POST tests on redis', function() {
-        it('returns 404 because no trail exists', function(done) {
+        it('returns 404 because if trail exists', function(done) {
             request.post('/GetCurrentTrail')
                    .send({
-                        route_id : 200
+                        route_id : 900
                     })
                     .expect(404)
                     .end(function(err, res) {
@@ -22,7 +22,7 @@ describe('POST tests on redis', function() {
                     });
         });
 
-        it('doesn`t return 404 because exists', function(done) {
+        it('doesn`t return 404 because stops exists', function(done) {
             request.post('/GetAllStops')
                 .send({
                     route_id : 200

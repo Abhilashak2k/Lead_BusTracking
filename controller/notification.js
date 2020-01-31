@@ -2,12 +2,14 @@ require('dotenv').config();
 const request = require('request');
 
 
-exports.SendSms = (req,resp)=>{
-  
-    // var mssg = req.body.message;
-    // var phonenumber = req.body.tosend;
-    //
-    //   var obj = {
+exports.SendSmsNotif = ( boarded, n_boarded, returnData)=>{
+
+    let mssg = "Your child has successfully boarded";
+    let n_mssg = "Your child has  not boarded";
+
+    returnData(`Sending ${mssg} to phone numbers ${boarded}`, `Sending ${n_mssg} to phone numbers ${n_boarded}`);
+
+    //   let obj = {
     //   apikey:process.env.SMSAPIKEY,  //Put your way2sms api key
     //   secret:process.env.SMSSECRET,  // Put your way2sms secret key
     //   usetype:"stage",
@@ -28,12 +30,3 @@ exports.SendSms = (req,resp)=>{
     //     }
     // });
   }
-
-
-exports.sendemail = (req,res)=>{
-
-
-    //sending email logic
-
-    res.send('EMAIL notification send');
-}

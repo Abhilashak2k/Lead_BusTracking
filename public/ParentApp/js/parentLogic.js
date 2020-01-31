@@ -32,19 +32,17 @@ function addMessages(message) {
     //Display on map
     longi = g_lang;
     lati = g_lati;
-
     if(flag==0){
       $(".container").empty();
+
       map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: lati, lng:  longi},
         zoom: 13
       });
       flag++;
       $.post('/getallstops', {route_id : bid}, (data)=>{
-        //console.log(data);
-        for (var i = 0; i < data.length; i++) {
+        for (var i = 0; i < data.length; i+=8) {
           let stopCoords = data[i].split(',');
-          console.log(stopCoords[0], stopCoords[1]);
           stopMarker = new google.maps.Marker({
               map:map,
               position: new google.maps.LatLng(stopCoords[0], stopCoords[1]),
@@ -85,12 +83,9 @@ function getRouteId() {
         PhNo: phNo
     }, (data) => {
         if (data.length == 1) {
-            document.getElementById("bid").value = "Your Route ID is " + data[0].route_id;
             bid = data[0].route_id;
+            $("#Submit-button").replaceWith('<button id="Submit-button" onclick="start()" >Start receiving location</button>');
         } else if (data.length > 1) {
-
-            const routeButton = document.getElementById("RouteButton");
-            routeButton.parentNode.removeChild(routeButton);
 
             let html = `<select  id = "DropDown">` +
                 `<option selected hidden style='display:none'>Select Childname</option>`;
@@ -99,18 +94,21 @@ function getRouteId() {
                 html += `<option>${element.name}</option>`;
             });
 
-            html = html + `</select><button id="Childname">Submit</button>`;
+            html = html + `</select>`;
             $("#DropBox").append(html);
+            $("#Submit-button").replaceWith('<button id="Submit-button">Submit childname</button>');
+            //to remove onclick = getRouteId from submit button
 
-            $("#Childname").click(function() {
+            $("#Submit-button").click(function() {
                 let childname = document.getElementById("DropDown").value;
                 data.forEach(element => {
                     if (element.name == childname) {
-                        document.getElementById("bid").value = "Your Route ID is " + element.route_id;
                         bid = element.route_id;
+                        $("#Submit-button").replaceWith('<button id="Submit-button" onclick="start()" >Start receiving location</button>');
                     }
                 });
             });
+
         } else {
             alert("Enter a registered Phone Number");
             document.getElementById("PhNo").value = "";
@@ -119,8 +117,6 @@ function getRouteId() {
 }
 
 function findLoc() {
-
-  var lati, longi;
   if( !navigator.geolocation ){
     alert("Browser has no location access!!");
   }
