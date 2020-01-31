@@ -13,6 +13,18 @@ Chat rooms built using Socket.io library                                        
 Map API used: - Google
 SMS API used: - Way2Sms
 
+### Routes
+
+/FindAllParentsSendNotification : Given two lists of students who have boarded and those who haven't,it fetches their respective parent phone numbers from the DB to send them success/failure SMS
+
+/UpdateConductorRouteInfo : Given Bus number and shift, it returns its respective route id
+
+/getConductorDetailsUsingRoute : Given route id, it returns the list of bus stops and the list of students associate with every bus stop.
+
+/UpdateParentRouteInfo : Given phone number of parent, it returns the respective route id.
+
+/GetAllStops : returns all bus stops stored in redis or if absent on redis, from the DB.
+
 ## Usage:
 	                                                                    			                     
 ### Driver Side Landing Page 
