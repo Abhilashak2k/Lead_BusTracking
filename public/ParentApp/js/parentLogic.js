@@ -32,7 +32,6 @@ function addMessages(message) {
     //Display on map
     longi = g_lang;
     lati = g_lati;
-    console.log(message);
     if(flag==0){
       $(".container").empty();
 
@@ -42,10 +41,8 @@ function addMessages(message) {
       });
       flag++;
       $.post('/getallstops', {route_id : bid}, (data)=>{
-        //console.log(data);
         for (var i = 0; i < data.length; i+=8) {
           let stopCoords = data[i].split(',');
-          console.log(stopCoords[0], stopCoords[1]);
           stopMarker = new google.maps.Marker({
               map:map,
               position: new google.maps.LatLng(stopCoords[0], stopCoords[1]),
@@ -107,7 +104,6 @@ function getRouteId() {
                 data.forEach(element => {
                     if (element.name == childname) {
                         bid = element.route_id;
-                        console.log(bid);
                         $("#Submit-button").replaceWith('<button id="Submit-button" onclick="start()" >Start receiving location</button>');
                     }
                 });

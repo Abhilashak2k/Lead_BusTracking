@@ -25,7 +25,6 @@ exports.getConductorDetailsUsingRoute = (routeid, returnData) => {
 }
 
 exports.FindAllParentsSendNotification = (childList, n_childList, returnData) => {
-  console.log(childList, n_childList);
 
     let ch_list = "(";
     for(let i=0;i<childList.length-1;i++){
@@ -50,6 +49,7 @@ exports.FindAllParentsSendNotification = (childList, n_childList, returnData) =>
                   JOIN parent_child ON parent._id = parent_child.parent_id
                   AND child_id IN ${ch_list}`,
                   (err, data)=>{
+                    console.log(data + "fq");
                     if(err) console.error();
                     else{
                       conn.query(`SELECT phone
@@ -57,6 +57,7 @@ exports.FindAllParentsSendNotification = (childList, n_childList, returnData) =>
                                   JOIN parent_child ON parent._id = parent_child.parent_id
                                   AND child_id IN ${n_ch_list}`,
                                   (err, n_data)=>{
+                                    console.log(n_data, "fqq");
                                     if(err) console.error();
                                     else{
                                       console.log( n_data,  "n firequery data");
@@ -136,23 +137,5 @@ exports.UpdateParentRouteInfo = (parent_no, returnData)=>{
               }
           })
 
-  });
-}
-
-exports.FindParentSendNotification = (regNo, returnData) => {
-  poolDB.getConnection((err, conn) => {
-      conn.query(`SELECT phone
-                  FROM parent
-                    JOIN parent_child ON parent._id = parent_child.parent_id
-                    AND child_id = ${regNo}
-                  `,
-          (err, data) => {
-              if (err)
-                  console.log("There is an error " + err);
-              else {
-                returnData(data[0].phone); //callback
-                console.log("Parent phone number details " + data[0].phone);
-              }
-          });
   });
 }

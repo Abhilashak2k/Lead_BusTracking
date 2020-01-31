@@ -15,7 +15,6 @@ function sendServer() {
         BusNo: b_id,
         Shift: sid
     }, function(data) {
-      console.log(data.length);
         if(!data)
           alert("Enter correct credentials!!");
         else{
@@ -25,33 +24,17 @@ function sendServer() {
       });
 }
 
-function sendSMS() {
-    const sid = document.getElementById("Sid").value;
-    $.post("/FindParentSendNotification", {
-        RegNo: sid
-    }, function(data) {
-        document.getElementById("Sid").value="";
-        console.log("Parent to be sent success SMS " + data);
-        $.post("/sendsms", {message : "Your child has boarded", tosend:  data}, (successMsg)=>{
-          console.log(successMsg + "Message sent!");
-        })
-    });
-}
-
 function loadNavPage() {
   bid= parent.document.URL.substring(parent.document.URL.indexOf('=')+1, parent.document.URL.length);
 
   $('.nav-header').html('ROUTE ID : '+bid);
   loadcards();
-  console.log("i am here");
   sendlocation();
 
 }
 
 
 function loadcards(){
-
-console.log("should here");
 
   $.post("/getConductorDetailsUsingRoute",{route_id:bid},function(data,err){
     console.log(data[0],data[1]);
@@ -103,37 +86,32 @@ console.log("should here");
 
 
 function sendlocation(){
-  //bid=200;
-  console.log("bid id : ",bid)
   socket = io('http://localhost:3600');
 
       socket.emit('new-user', bid);
-      console.log(socket);
-      //let journeyElement = document.getElementById("journey");
-
-
-
       let lat, curLat;
       let lang, curLang;
       let dif = 1;
 
-      // navigator.geolocation.getCurrentPosition((pos) => {
-      //     // lat = curLat = pos.coords.latitude;
-      //     // lang = curLang = pos.coords.longitude;
-      //     lat = curLat = obj[0][1]
-      //     lang = curLang = obj[0][0]
-      // });
+      navigator.geolocation.getCurrentPosition((pos) => {
+          // lat = curLat = pos.coords.latitude;
+          // lang = curLang = pos.coords.longitude;
+          lat = curLat = obj[0][1]
+          lang = curLang = obj[0][0]
+      });
 
       intervalFunction = setInterval(timer, 1000);
 
       function timer(){
 
-            curLat=obj[i++][1];
-            curLang=obj[i][0];
+        // curLat = pos.coords.latitude;
+        // curLang = pos.coords.longitude;
+        lat = curLat = obj[i++][1]
+        lang = curLang = obj[i][0]
 
-            if(i == obj.length-1){
-              clearInterval(intervalFunction);
-            }
+        if(i == obj.length-1){
+          clearInterval(intervalFunction);
+        }
 
         room = bid;
 
@@ -142,16 +120,21 @@ function sendlocation(){
             lang: curLang,
             room: bid
         }
-        socket.emit('getloc', position);
 
-        console.log(position);
+
+        //if(abs(curLat-lat) >= 0.0001 || abs(curLang-lang) >= 0.0001 ){
+          socket.emit('getloc', position);
+        //   lat=curLat;
+        //   lang=curLang;
+        // }
+
     }
 
 
 }
 
 function endJourney() {
-  document.getElementById("endJourney").innerHTML = "<button>Journey Ended</button>";
+  document.getElementById("endJourney").innerHTML = "<button id='endJourney' >Journey Ended</button>";
   socket.emit('dis-user', bid);
   clearInterval(intervalFunction);
   window.location = "driverLanding.html";

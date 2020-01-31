@@ -17,11 +17,18 @@ exports.UpdateConductorRouteInfo = (req, res) => {
 
 exports.FindAllParentsSendNotification = (req, res) => {
   //console.log(req.body,typeof(req.body));
-  var obj = req.body; 
+  var obj = req.body;
   //console.log(Object.keys(obj));
-    let childList =obj['rollList[]'];
-    let n_childList =obj['n_rollList[]'];
-    console.log(childList,n_childList);
+    let childList = obj['rollList[]'];
+    let n_childList = obj['n_rollList[]'];
+
+    console.log(childList, n_childList);
+
+    if(childList == undefined)
+      childList=[];
+
+    if(n_childList == undefined)
+      n_childList=[];
 
     fireQuery.FindAllParentsSendNotification(childList, n_childList, (data, n_data)=>{
       for (var i = 0; i < data.length; i++) {

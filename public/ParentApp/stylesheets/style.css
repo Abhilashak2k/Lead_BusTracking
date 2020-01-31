@@ -48,7 +48,7 @@ img {
 }
 
 
-.form-driver input, .form-driver select {
+.form-driver input, .form-driver select, #DropDown, option {
   background: #FFFFFF;
   border: 1.17021px solid #000000;
   box-sizing: border-box;
@@ -58,7 +58,7 @@ img {
   top: 50%;
 }
 
-.form-driver input[type="text"], .form-driver select {
+.form-driver input[type="text"], .form-driver select, option {
   margin-top: 5%;
   padding-left: 5.75%;
   padding-right: 13.42%;
@@ -76,7 +76,7 @@ img {
   color: rgba(0, 0, 0, 0.8);
 }
 
-#input-fields {
+#input-fields , option{
   background: #ffffff;
   padding-top: 53px;
   padding-bottom: 53px;
